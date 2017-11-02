@@ -6,7 +6,7 @@
 # File conflicts between gtk3-tests and gtk4-tests
 %global build_installed_tests 0
 
-%global glib2_version 2.53.0
+%global glib2_version 2.53.7
 %global pango_version 1.37.3
 %global atk_version 2.15.1
 %global cairo_version 1.14.0
@@ -21,18 +21,25 @@
 %global __provides_exclude_from ^%{_libdir}/gtk-4.0
 
 Name:           gtk4
-Version:        3.91.2
+Version:        3.92.1
 Release:        1%{?dist}
 Summary:        GTK+ graphical user interface library
 
 License:        LGPLv2+
 URL:            http://www.gtk.org
-Source0:        http://download.gnome.org/sources/gtk+/3.91/gtk+-%{version}.tar.xz
+Source0:        http://download.gnome.org/sources/gtk+/3.92/gtk+-%{version}.tar.xz
+# Build fixes backported from upstream
+Patch0:         0001-Add-default-return-values-to-switch-statements.patch
+Patch1:         0001-Fix-build.patch
+Patch2:         0001-Add-a-return-value.patch
+# Fix installing printbackends, backported from upstream
+Patch3:         0001-printing-Install-printbackends.patch
 
 BuildRequires:  cups-devel
 BuildRequires:  desktop-file-utils
 BuildRequires:  gettext
 BuildRequires:  gtk-doc
+BuildRequires:  meson
 BuildRequires:  pkgconfig(atk) >= %{atk_version}
 BuildRequires:  pkgconfig(atk-bridge-2.0)
 BuildRequires:  pkgconfig(avahi-gobject)
@@ -148,37 +155,35 @@ the functionality of the installed %{name} package.
 
 %prep
 %setup -q -n gtk+-%{version}
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
 
 %build
 export CFLAGS='-fno-strict-aliasing %optflags'
-%configure \
-        --enable-xkb \
-        --enable-xinerama \
-        --enable-xrandr \
-        --enable-xfixes \
-        --enable-xcomposite \
-        --enable-xdamage \
-        --enable-x11-backend \
+%meson \
+        -Denable-xinerama=yes \
+        -Denable-x11-backend=true \
 %if 0%{?with_wayland}
-        --enable-wayland-backend \
+        -Denable-wayland-backend=true \
 %endif
 %if 0%{?with_broadway}
-        --enable-broadway-backend \
+        -Denable-broadway-backend=true \
 %endif
-        --enable-colord \
+        -Denable-colord=yes \
+        -Ddocumentation=true \
+        -Dman-pages=true \
 %if 0%{?build_installed_tests}
-        --enable-installed-tests
+        -Denable-installed-tests=true
 %else
-        --disable-installed-tests
+        -Denable-installed-tests=false
 %endif
 
-# fight unused direct deps
-sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
-
-make %{?_smp_mflags}
+%meson_build
 
 %install
-%make_install RUN_QUERY_IMMODULES_TEST=false
+%meson_install
 
 %find_lang gtk40
 %find_lang gtk40-properties
@@ -188,9 +193,6 @@ make %{?_smp_mflags}
 )
 
 echo ".so man1/gtk4-query-immodules.1" > $RPM_BUILD_ROOT%{_mandir}/man1/gtk4-query-immodules-%{__isa_bits}.1
-
-# Remove unpackaged files
-find $RPM_BUILD_ROOT -name '*.la' -delete
 
 %if !0%{?with_broadway}
 rm $RPM_BUILD_ROOT%{_mandir}/man1/gtk4-broadwayd.1*
@@ -230,7 +232,7 @@ gtk-query-immodules-4.0-%{__isa_bits} --update-cache &>/dev/null || :
 
 %files -f gtk40.lang
 %license COPYING
-%doc AUTHORS NEWS README
+%doc AUTHORS NEWS README.md
 %{_bindir}/gtk4-query-immodules*
 %{_bindir}/gtk4-launch
 %{_bindir}/gtk4-update-icon-cache
@@ -243,17 +245,15 @@ gtk-query-immodules-4.0-%{__isa_bits} --update-cache &>/dev/null || :
 %{_libdir}/gtk-4.0/%{bin_version}/printbackends
 %{_libdir}/gtk-4.0/modules
 %{_libdir}/gtk-4.0/immodules
-%{_datadir}/themes/Default
-%{_datadir}/themes/Emacs
 %{_libdir}/girepository-1.0
 %ghost %{_libdir}/gtk-4.0/%{bin_version}/immodules.cache
 %{_mandir}/man1/gtk4-query-immodules*
 %{_mandir}/man1/gtk4-launch.1*
 %{_mandir}/man1/gtk4-update-icon-cache.1*
-%{_datadir}/glib-2.0/schemas/org.gtk.Settings.FileChooser.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gtk.Settings.ColorChooser.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gtk.Settings.Debug.gschema.xml
-%{_datadir}/glib-2.0/schemas/org.gtk.exampleapp.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gtk.Settings.EmojiChooser.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gtk.Settings.FileChooser.gschema.xml
 %if 0%{?with_broadway}
 %{_bindir}/gtk4-broadwayd
 %{_mandir}/man1/gtk4-broadwayd.1*
@@ -318,6 +318,9 @@ gtk-query-immodules-4.0-%{__isa_bits} --update-cache &>/dev/null || :
 %endif
 
 %changelog
+* Thu Nov 02 2017 Kalev Lember <klember@redhat.com> - 3.92.1-1
+- Update to 3.92.1
+
 * Tue Aug 08 2017 Kalev Lember <klember@redhat.com> - 3.91.2-1
 - Update to 3.91.2
 
