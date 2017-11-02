@@ -3,9 +3,6 @@
 %global with_broadway 1
 %endif
 
-# File conflicts between gtk3-tests and gtk4-tests
-%global build_installed_tests 0
-
 %global glib2_version 2.53.7
 %global pango_version 1.37.3
 %global atk_version 2.15.1
@@ -143,7 +140,6 @@ Requires: gtk4 = %{version}-%{release}
 This package contains developer documentation for version 4 of the GTK+
 widget toolkit.
 
-%if 0%{?build_installed_tests}
 %package tests
 Summary: Tests for the %{name} package
 Requires: %{name}%{?_isa} = %{version}-%{release}
@@ -151,7 +147,6 @@ Requires: %{name}%{?_isa} = %{version}-%{release}
 %description tests
 The %{name}-tests package contains tests that can be used to verify
 the functionality of the installed %{name} package.
-%endif
 
 %prep
 %setup -q -n gtk+-%{version}
@@ -174,11 +169,7 @@ export CFLAGS='-fno-strict-aliasing %optflags'
         -Denable-colord=yes \
         -Ddocumentation=true \
         -Dman-pages=true \
-%if 0%{?build_installed_tests}
         -Denable-installed-tests=true
-%else
-        -Denable-installed-tests=false
-%endif
 
 %meson_build
 
@@ -311,15 +302,14 @@ gtk-query-immodules-4.0-%{__isa_bits} --update-cache &>/dev/null || :
 %files devel-docs
 %{_datadir}/gtk-doc
 
-%if 0%{?build_installed_tests}
 %files tests
-%{_libexecdir}/installed-tests/gtk+
-%{_datadir}/installed-tests
-%endif
+%dir %{_libexecdir}/installed-tests
+%{_libexecdir}/installed-tests/gtk-4.0/
 
 %changelog
 * Thu Nov 02 2017 Kalev Lember <klember@redhat.com> - 3.92.1-1
 - Update to 3.92.1
+- Enable installed tests
 
 * Tue Aug 08 2017 Kalev Lember <klember@redhat.com> - 3.91.2-1
 - Update to 3.91.2
