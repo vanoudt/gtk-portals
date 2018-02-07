@@ -19,7 +19,7 @@
 
 Name:           gtk4
 Version:        3.92.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GTK+ graphical user interface library
 
 License:        LGPLv2+
@@ -307,6 +307,9 @@ gtk-query-immodules-4.0-%{__isa_bits} --update-cache &>/dev/null || :
 %{_libexecdir}/installed-tests/gtk-4.0/
 
 %changelog
+* Wed Feb 07 2018 Fedora Release Engineering <releng@fedoraproject.org> - 3.92.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
+
 * Thu Nov 02 2017 Kalev Lember <klember@redhat.com> - 3.92.1-1
 - Update to 3.92.1
 - Enable installed tests
