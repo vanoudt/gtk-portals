@@ -32,11 +32,12 @@ Patch2:         0001-Add-a-return-value.patch
 # Fix installing printbackends, backported from upstream
 Patch3:         0001-printing-Install-printbackends.patch
 
+BuildRequires:  meson >= 0.42.1
+BuildRequires:  gcc
 BuildRequires:  cups-devel
 BuildRequires:  desktop-file-utils
 BuildRequires:  gettext
 BuildRequires:  gtk-doc
-BuildRequires:  meson
 BuildRequires:  pkgconfig(atk) >= %{atk_version}
 BuildRequires:  pkgconfig(atk-bridge-2.0)
 BuildRequires:  pkgconfig(avahi-gobject)
@@ -68,6 +69,8 @@ BuildRequires:  pkgconfig(wayland-egl) >= %{wayland_version}
 BuildRequires:  pkgconfig(wayland-protocols) >= %{wayland_protocols_version}
 BuildRequires:  pkgconfig(xkbcommon)
 %endif
+# For testing
+BuildRequires:  gcc-c++
 
 # standard icons
 Requires: adwaita-icon-theme
