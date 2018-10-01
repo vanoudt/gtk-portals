@@ -3,14 +3,14 @@
 %global with_broadway 1
 %endif
 
-%global glib2_version 2.53.7
-%global pango_version 1.37.3
+%global glib2_version 2.55.0
+%global pango_version 1.41.0
 %global atk_version 2.15.1
 %global cairo_version 1.14.0
 %global gdk_pixbuf_version 2.30.0
-%global wayland_version 1.9.91
-%global wayland_protocols_version 1.9
-%global epoxy_version 1.0
+%global wayland_protocols_version 1.12
+%global wayland_version 1.14.91
+%global epoxy_version 1.4
 
 %global bin_version 4.0.0
 
@@ -18,26 +18,21 @@
 %global __provides_exclude_from ^%{_libdir}/gtk-4.0
 
 Name:           gtk4
-Version:        3.92.1
-Release:        4%{?dist}
+Version:        3.94.0
+Release:        1%{?dist}
 Summary:        GTK+ graphical user interface library
 
 License:        LGPLv2+
 URL:            http://www.gtk.org
-Source0:        http://download.gnome.org/sources/gtk+/3.92/gtk+-%{version}.tar.xz
-# Build fixes backported from upstream
-Patch0:         0001-Add-default-return-values-to-switch-statements.patch
-Patch1:         0001-Fix-build.patch
-Patch2:         0001-Add-a-return-value.patch
-# Fix installing printbackends, backported from upstream
-Patch3:         0001-printing-Install-printbackends.patch
+Source0:        http://download.gnome.org/sources/gtk+/3.94/gtk+-%{version}.tar.xz
 
-BuildRequires:  meson >= 0.42.1
-BuildRequires:  gcc
 BuildRequires:  cups-devel
 BuildRequires:  desktop-file-utils
 BuildRequires:  gettext
+BuildRequires:  gcc
+BuildRequires:  gcc-c++
 BuildRequires:  gtk-doc
+BuildRequires:  meson
 BuildRequires:  pkgconfig(atk) >= %{atk_version}
 BuildRequires:  pkgconfig(atk-bridge-2.0)
 BuildRequires:  pkgconfig(avahi-gobject)
@@ -49,6 +44,7 @@ BuildRequires:  pkgconfig(gdk-pixbuf-2.0) >= %{gdk_pixbuf_version}
 BuildRequires:  pkgconfig(glib-2.0) >= %{glib2_version}
 BuildRequires:  pkgconfig(gobject-introspection-1.0)
 BuildRequires:  pkgconfig(graphene-gobject-1.0)
+BuildRequires:  pkgconfig(gstreamer-player-1.0)
 BuildRequires:  pkgconfig(json-glib-1.0)
 BuildRequires:  pkgconfig(pango) >= %{pango_version}
 BuildRequires:  pkgconfig(rest-0.7)
@@ -69,8 +65,6 @@ BuildRequires:  pkgconfig(wayland-egl) >= %{wayland_version}
 BuildRequires:  pkgconfig(wayland-protocols) >= %{wayland_protocols_version}
 BuildRequires:  pkgconfig(xkbcommon)
 %endif
-# For testing
-BuildRequires:  gcc-c++
 
 # standard icons
 Requires: adwaita-icon-theme
@@ -100,6 +94,10 @@ Recommends: dconf%{?_isa}
 Requires: dconf%{?_isa}
 %endif
 
+# Removed in F29
+Obsoletes: gtk4-immodules < 3.94.0
+Obsoletes: gtk4-immodule-xim < 3.94.0
+
 %description
 GTK+ is a multi-platform toolkit for creating graphical user
 interfaces. Offering a complete set of widgets, GTK+ is suitable for
@@ -107,23 +105,6 @@ projects ranging from small one-off tools to complete application
 suites.
 
 This package contains version 4 of GTK+.
-
-%package immodules
-Summary: Input methods for GTK+
-Requires: gtk4%{?_isa} = %{version}-%{release}
-# for im-cedilla.conf
-Requires: gtk2-immodules%{?_isa}
-
-%description immodules
-The gtk4-immodules package contains standalone input methods that
-are shipped as part of GTK+ 4.
-
-%package immodule-xim
-Summary: XIM support for GTK+
-Requires: gtk4%{?_isa} = %{version}-%{release}
-
-%description immodule-xim
-The gtk4-immodule-xim package contains XIM support for GTK+ 4.
 
 %package devel
 Summary: Development files for GTK+
@@ -153,26 +134,22 @@ the functionality of the installed %{name} package.
 
 %prep
 %setup -q -n gtk+-%{version}
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
 
 %build
 export CFLAGS='-fno-strict-aliasing %optflags'
 %meson \
-        -Denable-xinerama=yes \
-        -Denable-x11-backend=true \
+        -Dx11-backend=true \
 %if 0%{?with_wayland}
-        -Denable-wayland-backend=true \
+        -Dwayland-backend=true \
 %endif
 %if 0%{?with_broadway}
-        -Denable-broadway-backend=true \
+        -Dbroadway-backend=true \
 %endif
-        -Denable-colord=yes \
+        -Dxinerama=yes \
+        -Dcolord=yes \
         -Ddocumentation=true \
         -Dman-pages=true \
-        -Denable-installed-tests=true
+        -Dinstall-tests=true
 
 %meson_build
 
@@ -182,21 +159,12 @@ export CFLAGS='-fno-strict-aliasing %optflags'
 %find_lang gtk40
 %find_lang gtk40-properties
 
-(cd $RPM_BUILD_ROOT%{_bindir}
- mv gtk4-query-immodules gtk4-query-immodules-%{__isa_bits}
-)
-
-echo ".so man1/gtk4-query-immodules.1" > $RPM_BUILD_ROOT%{_mandir}/man1/gtk4-query-immodules-%{__isa_bits}.1
-
 %if !0%{?with_broadway}
 rm $RPM_BUILD_ROOT%{_mandir}/man1/gtk4-broadwayd.1*
 %endif
 
-touch $RPM_BUILD_ROOT%{_libdir}/gtk-4.0/%{bin_version}/immodules.cache
-
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/gtk-4.0
 mkdir -p $RPM_BUILD_ROOT%{_libdir}/gtk-4.0/modules
-mkdir -p $RPM_BUILD_ROOT%{_libdir}/gtk-4.0/immodules
 mkdir -p $RPM_BUILD_ROOT%{_libdir}/gtk-4.0/%{bin_version}/theming-engines
 
 %check
@@ -218,30 +186,19 @@ fi
 %posttrans devel
 gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
-%transfiletriggerin -- %{_libdir}/gtk-4.0/%{bin_version}/immodules
-gtk4-query-immodules-%{__isa_bits} --update-cache &>/dev/null || :
-
-%transfiletriggerpostun -- %{_libdir}/gtk-4.0/%{bin_version}/immodules
-gtk-query-immodules-4.0-%{__isa_bits} --update-cache &>/dev/null || :
-
 %files -f gtk40.lang
 %license COPYING
 %doc AUTHORS NEWS README.md
-%{_bindir}/gtk4-query-immodules*
 %{_bindir}/gtk4-launch
 %{_bindir}/gtk4-update-icon-cache
 %{_libdir}/libgtk-4.so.*
 %dir %{_libdir}/gtk-4.0
 %dir %{_libdir}/gtk-4.0/%{bin_version}
-%dir %{_datadir}/gtk-4.0
-%{_libdir}/gtk-4.0/%{bin_version}/theming-engines
-%dir %{_libdir}/gtk-4.0/%{bin_version}/immodules
-%{_libdir}/gtk-4.0/%{bin_version}/printbackends
+%{_libdir}/gtk-4.0/%{bin_version}/media/
+%{_libdir}/gtk-4.0/%{bin_version}/printbackends/
+%{_libdir}/gtk-4.0/%{bin_version}/theming-engines/
 %{_libdir}/gtk-4.0/modules
-%{_libdir}/gtk-4.0/immodules
 %{_libdir}/girepository-1.0
-%ghost %{_libdir}/gtk-4.0/%{bin_version}/immodules.cache
-%{_mandir}/man1/gtk4-query-immodules*
 %{_mandir}/man1/gtk4-launch.1*
 %{_mandir}/man1/gtk4-update-icon-cache.1*
 %{_datadir}/glib-2.0/schemas/org.gtk.Settings.ColorChooser.gschema.xml
@@ -252,25 +209,6 @@ gtk-query-immodules-4.0-%{__isa_bits} --update-cache &>/dev/null || :
 %{_bindir}/gtk4-broadwayd
 %{_mandir}/man1/gtk4-broadwayd.1*
 %endif
-
-%files immodules
-%{_libdir}/gtk-4.0/%{bin_version}/immodules/im-cedilla.so
-%{_libdir}/gtk-4.0/%{bin_version}/immodules/im-am-et.so
-%{_libdir}/gtk-4.0/%{bin_version}/immodules/im-cyrillic-translit.so
-%{_libdir}/gtk-4.0/%{bin_version}/immodules/im-inuktitut.so
-%{_libdir}/gtk-4.0/%{bin_version}/immodules/im-ipa.so
-%{_libdir}/gtk-4.0/%{bin_version}/immodules/im-multipress.so
-%{_libdir}/gtk-4.0/%{bin_version}/immodules/im-thai.so
-%{_libdir}/gtk-4.0/%{bin_version}/immodules/im-ti-er.so
-%{_libdir}/gtk-4.0/%{bin_version}/immodules/im-ti-et.so
-%{_libdir}/gtk-4.0/%{bin_version}/immodules/im-viqr.so
-%if 0%{?with_broadway}
-%{_libdir}/gtk-4.0/%{bin_version}/immodules/im-broadway.so
-%endif
-%config(noreplace) %{_sysconfdir}/gtk-4.0/im-multipress.conf
-
-%files immodule-xim
-%{_libdir}/gtk-4.0/%{bin_version}/immodules/im-xim.so
 
 %files devel -f gtk40-properties.lang
 %{_libdir}/lib*.so
@@ -291,9 +229,12 @@ gtk-query-immodules-4.0-%{__isa_bits} --update-cache &>/dev/null || :
 %{_bindir}/gtk4-demo-application
 %{_bindir}/gtk4-widget-factory
 %{_datadir}/gettext/
+%dir %{_datadir}/gtk-4.0
 %{_datadir}/gtk-4.0/gtkbuilder.rng
 %{_datadir}/gir-1.0
 %{_datadir}/glib-2.0/schemas/org.gtk.Demo.gschema.xml
+%{_datadir}/metainfo/org.gtk.Demo.appdata.xml
+%{_datadir}/metainfo/org.gtk.WidgetFactory.appdata.xml
 %{_mandir}/man1/gtk4-builder-tool.1*
 %{_mandir}/man1/gtk4-demo.1*
 %{_mandir}/man1/gtk4-demo-application.1*
@@ -308,8 +249,15 @@ gtk-query-immodules-4.0-%{__isa_bits} --update-cache &>/dev/null || :
 %files tests
 %dir %{_libexecdir}/installed-tests
 %{_libexecdir}/installed-tests/gtk-4.0/
+%dir %{_datadir}/installed-tests
+%{_datadir}/installed-tests/gtk-4.0/
 
 %changelog
+* Mon Oct 01 2018 Kalev Lember <klember@redhat.com> - 3.94.0-1
+- Update to 3.94.0
+- Remove and obsolete immodules subpackages
+- Build new gstreamer media backend
+
 * Fri Jul 13 2018 Fedora Release Engineering <releng@fedoraproject.org> - 3.92.1-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
 
