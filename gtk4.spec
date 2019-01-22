@@ -170,9 +170,7 @@ mkdir -p $RPM_BUILD_ROOT%{_libdir}/gtk-4.0/%{bin_version}/theming-engines
 %check
 desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 
-%post -p /sbin/ldconfig
-
-%postun -p /sbin/ldconfig
+%ldconfig_scriptlets
 
 %post devel
 touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
