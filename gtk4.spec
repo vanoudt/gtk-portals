@@ -20,7 +20,7 @@
 Name:           gtk4
 Version:        3.96.0
 Release:        1%{?dist}
-Summary:        GTK+ graphical user interface library
+Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
 URL:            http://www.gtk.org
@@ -99,29 +99,29 @@ Obsoletes: gtk4-immodules < 3.94.0
 Obsoletes: gtk4-immodule-xim < 3.94.0
 
 %description
-GTK+ is a multi-platform toolkit for creating graphical user
-interfaces. Offering a complete set of widgets, GTK+ is suitable for
+GTK is a multi-platform toolkit for creating graphical user
+interfaces. Offering a complete set of widgets, GTK is suitable for
 projects ranging from small one-off tools to complete application
 suites.
 
-This package contains version 4 of GTK+.
+This package contains version 4 of GTK.
 
 %package devel
-Summary: Development files for GTK+
+Summary: Development files for GTK
 Requires: gtk4%{?_isa} = %{version}-%{release}
 
 %description devel
 This package contains the libraries and header files that are needed
-for writing applications with version 4 of the GTK+ widget toolkit. If
-you plan to develop applications with GTK+, consider installing the
+for writing applications with version 4 of the GTK widget toolkit. If
+you plan to develop applications with GTK, consider installing the
 gtk4-devel-docs package.
 
 %package devel-docs
-Summary: Developer documentation for GTK+
+Summary: Developer documentation for GTK
 Requires: gtk4 = %{version}-%{release}
 
 %description devel-docs
-This package contains developer documentation for version 4 of the GTK+
+This package contains developer documentation for version 4 of the GTK
 widget toolkit.
 
 %package tests
@@ -243,6 +243,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %changelog
 * Tue May 07 2019 Kalev Lember <klember@redhat.com> - 3.96.0-1
 - Update to 3.96.0
+- Use GTK instead of GTK+ in descriptions
 
 * Fri Feb 01 2019 Fedora Release Engineering <releng@fedoraproject.org> - 3.94.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
