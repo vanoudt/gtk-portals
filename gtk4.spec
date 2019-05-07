@@ -98,6 +98,9 @@ Requires: dconf%{?_isa}
 Obsoletes: gtk4-immodules < 3.94.0
 Obsoletes: gtk4-immodule-xim < 3.94.0
 
+# Removed in F30
+Obsoletes: gtk4-tests < 3.96.0
+
 %description
 GTK is a multi-platform toolkit for creating graphical user
 interfaces. Offering a complete set of widgets, GTK is suitable for
@@ -124,14 +127,6 @@ Requires: gtk4 = %{version}-%{release}
 This package contains developer documentation for version 4 of the GTK
 widget toolkit.
 
-%package tests
-Summary: Tests for the %{name} package
-Requires: %{name}%{?_isa} = %{version}-%{release}
-
-%description tests
-The %{name}-tests package contains tests that can be used to verify
-the functionality of the installed %{name} package.
-
 %prep
 %setup -q -n gtk-%{version}
 
@@ -149,7 +144,7 @@ export CFLAGS='-fno-strict-aliasing %optflags'
         -Dcolord=yes \
         -Ddocumentation=true \
         -Dman-pages=true \
-        -Dinstall-tests=true
+        -Dinstall-tests=false
 
 %meson_build
 
@@ -234,16 +229,11 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %files devel-docs
 %{_datadir}/gtk-doc
 
-%files tests
-%dir %{_libexecdir}/installed-tests
-%{_libexecdir}/installed-tests/gtk-4.0/
-%dir %{_datadir}/installed-tests
-%{_datadir}/installed-tests/gtk-4.0/
-
 %changelog
 * Tue May 07 2019 Kalev Lember <klember@redhat.com> - 3.96.0-1
 - Update to 3.96.0
 - Use GTK instead of GTK+ in descriptions
+- Don't ship installed tests as they are currently broken
 
 * Fri Feb 01 2019 Fedora Release Engineering <releng@fedoraproject.org> - 3.94.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
