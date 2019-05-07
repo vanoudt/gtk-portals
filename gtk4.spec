@@ -18,13 +18,13 @@
 %global __provides_exclude_from ^%{_libdir}/gtk-4.0
 
 Name:           gtk4
-Version:        3.94.0
-Release:        2%{?dist}
+Version:        3.96.0
+Release:        1%{?dist}
 Summary:        GTK+ graphical user interface library
 
 License:        LGPLv2+
 URL:            http://www.gtk.org
-Source0:        http://download.gnome.org/sources/gtk+/3.94/gtk+-%{version}.tar.xz
+Source0:        http://download.gnome.org/sources/gtk/3.96/gtk-%{version}.tar.xz
 
 BuildRequires:  cups-devel
 BuildRequires:  desktop-file-utils
@@ -133,7 +133,7 @@ The %{name}-tests package contains tests that can be used to verify
 the functionality of the installed %{name} package.
 
 %prep
-%setup -q -n gtk+-%{version}
+%setup -q -n gtk-%{version}
 
 %build
 export CFLAGS='-fno-strict-aliasing %optflags'
@@ -187,10 +187,10 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_libdir}/girepository-1.0
 %{_mandir}/man1/gtk4-launch.1*
 %{_mandir}/man1/gtk4-update-icon-cache.1*
-%{_datadir}/glib-2.0/schemas/org.gtk.Settings.ColorChooser.gschema.xml
-%{_datadir}/glib-2.0/schemas/org.gtk.Settings.Debug.gschema.xml
-%{_datadir}/glib-2.0/schemas/org.gtk.Settings.EmojiChooser.gschema.xml
-%{_datadir}/glib-2.0/schemas/org.gtk.Settings.FileChooser.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gtk.gtk4.Settings.ColorChooser.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gtk.gtk4.Settings.Debug.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gtk.gtk4.Settings.EmojiChooser.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gtk.gtk4.Settings.FileChooser.gschema.xml
 %if 0%{?with_broadway}
 %{_bindir}/gtk4-broadwayd
 %{_mandir}/man1/gtk4-broadwayd.1*
@@ -205,22 +205,24 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_bindir}/gtk4-encode-symbolic-svg
 %{_bindir}/gtk4-icon-browser
 %{_bindir}/gtk4-query-settings
-%{_datadir}/applications/gtk4-demo.desktop
-%{_datadir}/applications/gtk4-icon-browser.desktop
-%{_datadir}/applications/gtk4-widget-factory.desktop
-%{_datadir}/icons/hicolor/*/apps/gtk4-demo.png
-%{_datadir}/icons/hicolor/*/apps/gtk4-demo-symbolic.symbolic.png
-%{_datadir}/icons/hicolor/*/apps/gtk4-widget-factory.png
-%{_datadir}/icons/hicolor/*/apps/gtk4-widget-factory-symbolic.symbolic.png
+%{_datadir}/applications/org.gtk.Demo4.desktop
+%{_datadir}/applications/org.gtk.IconBrowser4.desktop
+%{_datadir}/applications/org.gtk.WidgetFactory4.desktop
+%{_datadir}/icons/hicolor/*/apps/org.gtk.Demo4.svg
+%{_datadir}/icons/hicolor/*/apps/org.gtk.IconBrowser4.svg
+%{_datadir}/icons/hicolor/*/apps/org.gtk.WidgetFactory4.svg
+%{_datadir}/icons/hicolor/symbolic/apps/org.gtk.Demo4-symbolic.svg
+%{_datadir}/icons/hicolor/symbolic/apps/org.gtk.IconBrowser4-symbolic.svg
+%{_datadir}/icons/hicolor/symbolic/apps/org.gtk.WidgetFactory4-symbolic.svg
 %{_bindir}/gtk4-demo-application
 %{_bindir}/gtk4-widget-factory
 %{_datadir}/gettext/
-%dir %{_datadir}/gtk-4.0
-%{_datadir}/gtk-4.0/gtkbuilder.rng
 %{_datadir}/gir-1.0
-%{_datadir}/glib-2.0/schemas/org.gtk.Demo.gschema.xml
-%{_datadir}/metainfo/org.gtk.Demo.appdata.xml
-%{_datadir}/metainfo/org.gtk.WidgetFactory.appdata.xml
+%{_datadir}/glib-2.0/schemas/org.gtk.Demo4.gschema.xml
+%dir %{_datadir}/gtk-4.0
+%{_datadir}/gtk-4.0/gtk4builder.rng
+%{_datadir}/metainfo/org.gtk.Demo4.appdata.xml
+%{_datadir}/metainfo/org.gtk.WidgetFactory4.appdata.xml
 %{_mandir}/man1/gtk4-builder-tool.1*
 %{_mandir}/man1/gtk4-demo.1*
 %{_mandir}/man1/gtk4-demo-application.1*
@@ -239,6 +241,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_datadir}/installed-tests/gtk-4.0/
 
 %changelog
+* Tue May 07 2019 Kalev Lember <klember@redhat.com> - 3.96.0-1
+- Update to 3.96.0
+
 * Fri Feb 01 2019 Fedora Release Engineering <releng@fedoraproject.org> - 3.94.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
 
