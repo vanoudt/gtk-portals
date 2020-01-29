@@ -19,7 +19,7 @@
 
 Name:           gtk4
 Version:        3.96.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
@@ -230,6 +230,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_datadir}/gtk-doc
 
 %changelog
+* Wed Jan 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 3.96.0-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
+
 * Thu Jul 25 2019 Fedora Release Engineering <releng@fedoraproject.org> - 3.96.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 
