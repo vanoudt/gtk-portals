@@ -17,6 +17,8 @@
 # Filter provides for private modules
 %global __provides_exclude_from ^%{_libdir}/gtk-4.0
 
+%global _legacy_common_support 1
+
 Name:           gtk4
 Version:        3.96.0
 Release:        3%{?dist}
