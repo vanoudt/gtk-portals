@@ -3,12 +3,12 @@
 %global with_broadway 1
 %endif
 
-%global glib2_version 2.55.0
-%global pango_version 1.41.0
+%global glib2_version 2.59.0
+%global pango_version 1.44.0
 %global atk_version 2.15.1
 %global cairo_version 1.14.0
 %global gdk_pixbuf_version 2.30.0
-%global wayland_protocols_version 1.12
+%global wayland_protocols_version 1.14
 %global wayland_version 1.14.91
 %global epoxy_version 1.4
 
