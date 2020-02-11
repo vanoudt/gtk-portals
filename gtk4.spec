@@ -17,16 +17,14 @@
 # Filter provides for private modules
 %global __provides_exclude_from ^%{_libdir}/gtk-4.0
 
-%global _legacy_common_support 1
-
 Name:           gtk4
-Version:        3.96.0
-Release:        3%{?dist}
+Version:        3.98.0
+Release:        1%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
 URL:            http://www.gtk.org
-Source0:        http://download.gnome.org/sources/gtk/3.96/gtk-%{version}.tar.xz
+Source0:        http://download.gnome.org/sources/gtk/3.98/gtk-%{version}.tar.xz
 
 BuildRequires:  cups-devel
 BuildRequires:  desktop-file-utils
@@ -67,6 +65,7 @@ BuildRequires:  pkgconfig(wayland-egl) >= %{wayland_version}
 BuildRequires:  pkgconfig(wayland-protocols) >= %{wayland_protocols_version}
 BuildRequires:  pkgconfig(xkbcommon)
 %endif
+BuildRequires:  sassc
 
 # standard icons
 Requires: adwaita-icon-theme
@@ -144,7 +143,7 @@ export CFLAGS='-fno-strict-aliasing %optflags'
 %endif
         -Dxinerama=yes \
         -Dcolord=yes \
-        -Ddocumentation=true \
+        -Dgtk_doc=true \
         -Dman-pages=true \
         -Dinstall-tests=false
 
@@ -232,6 +231,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_datadir}/gtk-doc
 
 %changelog
+* Tue Feb 11 2020 Kalev Lember <klember@redhat.com> - 3.98.0-1
+- Update to 3.98.0
+
 * Wed Jan 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 3.96.0-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
