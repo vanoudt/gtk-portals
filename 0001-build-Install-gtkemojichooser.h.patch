@@ -1,0 +1,28 @@
+From 1b95cd27bc6a1a7a213a9587a56ffe1e60b85e6c Mon Sep 17 00:00:00 2001
+From: Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
+Date: Wed, 12 Feb 2020 15:41:49 -0300
+Subject: [PATCH] build: Install gtkemojichooser.h
+
+It was made public at ef7172dc1ee86a, but the header file
+wasn't added to the public headers list.
+
+Add the header file to the list.
+---
+ gtk/meson.build | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/gtk/meson.build b/gtk/meson.build
+index 295ed0af6d..52badca381 100644
+--- a/gtk/meson.build
++++ b/gtk/meson.build
+@@ -461,6 +461,7 @@ gtk_public_headers = files([
+   'gtkdragsource.h',
+   'gtkdrawingarea.h',
+   'gtkeditable.h',
++  'gtkemojichooser.h',
+   'gtkentry.h',
+   'gtkentrybuffer.h',
+   'gtkentrycompletion.h',
+-- 
+2.24.1
+

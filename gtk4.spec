@@ -19,12 +19,14 @@
 
 Name:           gtk4
 Version:        3.98.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
 URL:            https://www.gtk.org
 Source0:        https://download.gnome.org/sources/gtk/3.98/gtk-%{version}.tar.xz
+# Backported from upstream
+Patch0:         0001-build-Install-gtkemojichooser.h.patch
 
 BuildRequires:  cups-devel
 BuildRequires:  desktop-file-utils
@@ -129,7 +131,7 @@ This package contains developer documentation for version 4 of the GTK
 widget toolkit.
 
 %prep
-%setup -q -n gtk-%{version}
+%autosetup -p1 -n gtk-%{version}
 
 %build
 export CFLAGS='-fno-strict-aliasing %optflags'
@@ -231,6 +233,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_datadir}/gtk-doc
 
 %changelog
+* Thu Mar 12 2020 Kalev Lember <klember@redhat.com> - 3.98.0-2
+- Install missing gtkemojichooser.h (#1806509)
+
 * Tue Feb 11 2020 Kalev Lember <klember@redhat.com> - 3.98.0-1
 - Update to 3.98.0
 - Use https for source URLs
