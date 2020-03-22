@@ -4,7 +4,7 @@
 %endif
 
 %global glib2_version 2.59.0
-%global pango_version 1.44.0
+%global pango_version 1.44.4
 %global atk_version 2.15.1
 %global cairo_version 1.14.0
 %global gdk_pixbuf_version 2.30.0
@@ -18,15 +18,13 @@
 %global __provides_exclude_from ^%{_libdir}/gtk-4.0
 
 Name:           gtk4
-Version:        3.98.0
-Release:        2%{?dist}
+Version:        3.98.1
+Release:        1%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
 URL:            https://www.gtk.org
 Source0:        https://download.gnome.org/sources/gtk/3.98/gtk-%{version}.tar.xz
-# Backported from upstream
-Patch0:         0001-build-Install-gtkemojichooser.h.patch
 
 BuildRequires:  cups-devel
 BuildRequires:  desktop-file-utils
@@ -219,6 +217,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_datadir}/glib-2.0/schemas/org.gtk.Demo4.gschema.xml
 %dir %{_datadir}/gtk-4.0
 %{_datadir}/gtk-4.0/gtk4builder.rng
+%{_datadir}/gtk-4.0/valgrind/
 %{_datadir}/metainfo/org.gtk.Demo4.appdata.xml
 %{_datadir}/metainfo/org.gtk.WidgetFactory4.appdata.xml
 %{_mandir}/man1/gtk4-builder-tool.1*
@@ -233,6 +232,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_datadir}/gtk-doc
 
 %changelog
+* Sun Mar 22 2020 Kalev Lember <klember@redhat.com> - 3.98.1-1
+- Update to 3.98.1
+
 * Thu Mar 12 2020 Kalev Lember <klember@redhat.com> - 3.98.0-2
 - Install missing gtkemojichooser.h (#1806509)
 
