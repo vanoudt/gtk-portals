@@ -18,7 +18,7 @@
 %global __provides_exclude_from ^%{_libdir}/gtk-4.0
 
 Name:           gtk4
-Version:        3.98.1
+Version:        3.98.2
 Release:        1%{?dist}
 Summary:        GTK graphical user interface library
 
@@ -232,6 +232,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_datadir}/gtk-doc
 
 %changelog
+* Wed Apr 01 2020 Kalev Lember <klember@redhat.com> - 3.98.2-1
+- Update to 3.98.2
+
 * Sun Mar 22 2020 Kalev Lember <klember@redhat.com> - 3.98.1-1
 - Update to 3.98.1
 
