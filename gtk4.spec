@@ -18,7 +18,7 @@
 %global __provides_exclude_from ^%{_libdir}/gtk-4.0
 
 Name:           gtk4
-Version:        3.98.2
+Version:        3.98.3
 Release:        1%{?dist}
 Summary:        GTK graphical user interface library
 
@@ -28,10 +28,10 @@ Source0:        https://download.gnome.org/sources/gtk/3.98/gtk-%{version}.tar.x
 
 BuildRequires:  cups-devel
 BuildRequires:  desktop-file-utils
-BuildRequires:  gettext
+BuildRequires:  docbook-style-xsl
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
-BuildRequires:  gtk-doc
+BuildRequires:  gettext
 BuildRequires:  meson
 BuildRequires:  pkgconfig(atk) >= %{atk_version}
 BuildRequires:  pkgconfig(atk-bridge-2.0)
@@ -66,6 +66,7 @@ BuildRequires:  pkgconfig(wayland-protocols) >= %{wayland_protocols_version}
 BuildRequires:  pkgconfig(xkbcommon)
 %endif
 BuildRequires:  sassc
+BuildRequires:  /usr/bin/xsltproc
 
 # standard icons
 Requires: adwaita-icon-theme
@@ -101,6 +102,8 @@ Obsoletes: gtk4-immodule-xim < 3.94.0
 
 # Removed in F30
 Obsoletes: gtk4-tests < 3.96.0
+# Removed in F32
+Obsoletes: gtk4-devel-docs < 3.98.3
 
 %description
 GTK is a multi-platform toolkit for creating graphical user
@@ -116,17 +119,7 @@ Requires: gtk4%{?_isa} = %{version}-%{release}
 
 %description devel
 This package contains the libraries and header files that are needed
-for writing applications with version 4 of the GTK widget toolkit. If
-you plan to develop applications with GTK, consider installing the
-gtk4-devel-docs package.
-
-%package devel-docs
-Summary: Developer documentation for GTK
-Requires: gtk4 = %{version}-%{release}
-
-%description devel-docs
-This package contains developer documentation for version 4 of the GTK
-widget toolkit.
+for writing applications with version 4 of the GTK widget toolkit.
 
 %prep
 %autosetup -p1 -n gtk-%{version}
@@ -143,7 +136,7 @@ export CFLAGS='-fno-strict-aliasing %optflags'
 %endif
         -Dxinerama=yes \
         -Dcolord=yes \
-        -Dgtk_doc=true \
+        -Dgtk_doc=false \
         -Dman-pages=true \
         -Dinstall-tests=false
 
@@ -228,10 +221,11 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-query-settings.1*
 %{_mandir}/man1/gtk4-widget-factory.1*
 
-%files devel-docs
-%{_datadir}/gtk-doc
-
 %changelog
+* Tue Apr 21 2020 Kalev Lember <klember@redhat.com> - 3.98.3-1
+- Update to 3.98.3
+- Temporarily disable built documentation as we don't have new enough gtk-doc
+
 * Wed Apr 01 2020 Kalev Lember <klember@redhat.com> - 3.98.2-1
 - Update to 3.98.2
 
