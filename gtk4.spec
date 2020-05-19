@@ -18,7 +18,7 @@
 %global __provides_exclude_from ^%{_libdir}/gtk-4.0
 
 Name:           gtk4
-Version:        3.98.3
+Version:        3.98.4
 Release:        1%{?dist}
 Summary:        GTK graphical user interface library
 
@@ -222,6 +222,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
+* Tue May 19 2020 Kalev Lember <klember@redhat.com> - 3.98.4-1
+- Update to 3.98.4
+
 * Tue Apr 21 2020 Kalev Lember <klember@redhat.com> - 3.98.3-1
 - Update to 3.98.3
 - Temporarily disable built documentation as we don't have new enough gtk-doc
