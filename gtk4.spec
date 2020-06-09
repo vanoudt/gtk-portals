@@ -3,12 +3,12 @@
 %global with_broadway 1
 %endif
 
-%global glib2_version 2.59.0
-%global pango_version 1.44.4
+%global glib2_version 2.63.1
+%global pango_version 1.45.0
 %global atk_version 2.15.1
 %global cairo_version 1.14.0
 %global gdk_pixbuf_version 2.30.0
-%global wayland_protocols_version 1.14
+%global wayland_protocols_version 1.20
 %global wayland_version 1.14.91
 %global epoxy_version 1.4
 
@@ -18,7 +18,7 @@
 %global __provides_exclude_from ^%{_libdir}/gtk-4.0
 
 Name:           gtk4
-Version:        3.98.4
+Version:        3.98.5
 Release:        1%{?dist}
 Summary:        GTK graphical user interface library
 
@@ -222,6 +222,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
+* Sun Jun 07 2020 Kalev Lember <klember@redhat.com> - 3.98.5-1
+- Update to 3.98.5
+
 * Tue May 19 2020 Kalev Lember <klember@redhat.com> - 3.98.4-1
 - Update to 3.98.4
 
