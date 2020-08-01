@@ -5,7 +5,6 @@
 
 %global glib2_version 2.63.1
 %global pango_version 1.45.0
-%global atk_version 2.15.1
 %global cairo_version 1.14.0
 %global gdk_pixbuf_version 2.30.0
 %global wayland_protocols_version 1.20
@@ -18,13 +17,13 @@
 %global __provides_exclude_from ^%{_libdir}/gtk-4.0
 
 Name:           gtk4
-Version:        3.98.5
-Release:        3%{?dist}
+Version:        3.99.0
+Release:        1%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
 URL:            https://www.gtk.org
-Source0:        https://download.gnome.org/sources/gtk/3.98/gtk-%{version}.tar.xz
+Source0:        https://download.gnome.org/sources/gtk/3.99/gtk-%{version}.tar.xz
 
 BuildRequires:  cups-devel
 BuildRequires:  desktop-file-utils
@@ -33,8 +32,6 @@ BuildRequires:  gcc
 BuildRequires:  gcc-c++
 BuildRequires:  gettext
 BuildRequires:  meson
-BuildRequires:  pkgconfig(atk) >= %{atk_version}
-BuildRequires:  pkgconfig(atk-bridge-2.0)
 BuildRequires:  pkgconfig(avahi-gobject)
 BuildRequires:  pkgconfig(cairo) >= %{cairo_version}
 BuildRequires:  pkgconfig(cairo-gobject) >= %{cairo_version}
@@ -75,7 +72,6 @@ Requires: hicolor-icon-theme
 # split out in a subpackage
 Requires: gtk-update-icon-cache
 
-Requires: atk%{?_isa} >= %{atk_version}
 Requires: cairo%{?_isa} >= %{cairo_version}
 Requires: cairo-gobject%{?_isa} >= %{cairo_version}
 Requires: glib2%{?_isa} >= %{glib2_version}
@@ -196,14 +192,15 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_bindir}/gtk4-query-settings
 %{_datadir}/applications/org.gtk.Demo4.desktop
 %{_datadir}/applications/org.gtk.IconBrowser4.desktop
+%{_datadir}/applications/org.gtk.PrintEditor4.desktop
 %{_datadir}/applications/org.gtk.WidgetFactory4.desktop
-%{_datadir}/icons/hicolor/*/apps/org.gtk.Demo4.svg
-%{_datadir}/icons/hicolor/*/apps/org.gtk.IconBrowser4.svg
-%{_datadir}/icons/hicolor/*/apps/org.gtk.WidgetFactory4.svg
-%{_datadir}/icons/hicolor/symbolic/apps/org.gtk.Demo4-symbolic.svg
-%{_datadir}/icons/hicolor/symbolic/apps/org.gtk.IconBrowser4-symbolic.svg
-%{_datadir}/icons/hicolor/symbolic/apps/org.gtk.WidgetFactory4-symbolic.svg
+%{_datadir}/icons/hicolor/*/apps/org.gtk.Demo4*.svg
+%{_datadir}/icons/hicolor/*/apps/org.gtk.gtk4.NodeEditor*.svg
+%{_datadir}/icons/hicolor/*/apps/org.gtk.IconBrowser4*.svg
+%{_datadir}/icons/hicolor/*/apps/org.gtk.PrintEditor4*.svg
+%{_datadir}/icons/hicolor/*/apps/org.gtk.WidgetFactory4*.svg
 %{_bindir}/gtk4-demo-application
+%{_bindir}/gtk4-print-editor
 %{_bindir}/gtk4-widget-factory
 %{_datadir}/gettext/
 %{_datadir}/gir-1.0
@@ -212,6 +209,8 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_datadir}/gtk-4.0/gtk4builder.rng
 %{_datadir}/gtk-4.0/valgrind/
 %{_datadir}/metainfo/org.gtk.Demo4.appdata.xml
+%{_datadir}/metainfo/org.gtk.IconBrowser4.appdata.xml
+%{_datadir}/metainfo/org.gtk.PrintEditor4.appdata.xml
 %{_datadir}/metainfo/org.gtk.WidgetFactory4.appdata.xml
 %{_mandir}/man1/gtk4-builder-tool.1*
 %{_mandir}/man1/gtk4-demo.1*
@@ -222,6 +221,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
+* Sat Aug 01 2020 Kalev Lember <klember@redhat.com> - 3.99.0-1
+- Update to 3.99.0
+
 * Sat Aug 01 2020 Fedora Release Engineering <releng@fedoraproject.org> - 3.98.5-3
 - Second attempt - Rebuilt for
   https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
