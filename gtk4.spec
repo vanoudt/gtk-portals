@@ -19,7 +19,7 @@
 
 Name:           gtk4
 Version:        3.98.5
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
@@ -222,6 +222,10 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
+* Sat Aug 01 2020 Fedora Release Engineering <releng@fedoraproject.org> - 3.98.5-3
+- Second attempt - Rebuilt for
+  https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
+
 * Tue Jul 28 2020 Fedora Release Engineering <releng@fedoraproject.org> - 3.98.5-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 
