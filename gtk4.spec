@@ -17,8 +17,8 @@
 %global __provides_exclude_from ^%{_libdir}/gtk-4.0
 
 Name:           gtk4
-Version:        3.99.0
-Release:        2%{?dist}
+Version:        3.99.1
+Release:        1%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
@@ -45,6 +45,7 @@ BuildRequires:  pkgconfig(gstreamer-player-1.0)
 BuildRequires:  pkgconfig(json-glib-1.0)
 BuildRequires:  pkgconfig(pango) >= %{pango_version}
 BuildRequires:  pkgconfig(rest-0.7)
+BuildRequires:  pkgconfig(vulkan)
 BuildRequires:  pkgconfig(xcomposite)
 BuildRequires:  pkgconfig(xcursor)
 BuildRequires:  pkgconfig(xdamage)
@@ -134,8 +135,8 @@ export CFLAGS='-fno-strict-aliasing %optflags'
 %if 0%{?with_broadway}
         -Dbroadway-backend=true \
 %endif
-        -Dxinerama=yes \
-        -Dcolord=yes \
+        -Dxinerama=enabled \
+        -Dcolord=enabled \
         -Dgtk_doc=false \
         -Dman-pages=true \
         -Dinstall-tests=false
@@ -199,7 +200,6 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_datadir}/applications/org.gtk.PrintEditor4.desktop
 %{_datadir}/applications/org.gtk.WidgetFactory4.desktop
 %{_datadir}/icons/hicolor/*/apps/org.gtk.Demo4*.svg
-%{_datadir}/icons/hicolor/*/apps/org.gtk.gtk4.NodeEditor*.svg
 %{_datadir}/icons/hicolor/*/apps/org.gtk.IconBrowser4*.svg
 %{_datadir}/icons/hicolor/*/apps/org.gtk.PrintEditor4*.svg
 %{_datadir}/icons/hicolor/*/apps/org.gtk.WidgetFactory4*.svg
@@ -225,6 +225,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
+* Thu Sep 03 2020 Kalev Lember <klember@redhat.com> - 3.99.1-1
+- Update to 3.99.1
+
 * Mon Aug 17 2020 Jeff Law <law@redhat.com> - 3.99.0-2
 - Disable LTO on armv7hl
 
