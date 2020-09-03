@@ -1,5 +1,4 @@
 %if 0%{?fedora}
-%global with_wayland 1
 %global with_broadway 1
 %endif
 
@@ -36,6 +35,7 @@ BuildRequires:  pkgconfig(avahi-gobject)
 BuildRequires:  pkgconfig(cairo) >= %{cairo_version}
 BuildRequires:  pkgconfig(cairo-gobject) >= %{cairo_version}
 BuildRequires:  pkgconfig(colord)
+BuildRequires:  pkgconfig(egl)
 BuildRequires:  pkgconfig(epoxy)
 BuildRequires:  pkgconfig(gdk-pixbuf-2.0) >= %{gdk_pixbuf_version}
 BuildRequires:  pkgconfig(glib-2.0) >= %{glib2_version}
@@ -46,23 +46,20 @@ BuildRequires:  pkgconfig(json-glib-1.0)
 BuildRequires:  pkgconfig(pango) >= %{pango_version}
 BuildRequires:  pkgconfig(rest-0.7)
 BuildRequires:  pkgconfig(vulkan)
+BuildRequires:  pkgconfig(wayland-client) >= %{wayland_version}
+BuildRequires:  pkgconfig(wayland-cursor) >= %{wayland_version}
+BuildRequires:  pkgconfig(wayland-egl) >= %{wayland_version}
+BuildRequires:  pkgconfig(wayland-protocols) >= %{wayland_protocols_version}
 BuildRequires:  pkgconfig(xcomposite)
 BuildRequires:  pkgconfig(xcursor)
 BuildRequires:  pkgconfig(xdamage)
 BuildRequires:  pkgconfig(xfixes)
 BuildRequires:  pkgconfig(xi)
 BuildRequires:  pkgconfig(xinerama)
+BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  pkgconfig(xrandr)
 BuildRequires:  pkgconfig(xrender)
 BuildRequires:  pkgconfig(xrender)
-%if 0%{?with_wayland}
-BuildRequires:  pkgconfig(egl)
-BuildRequires:  pkgconfig(wayland-client) >= %{wayland_version}
-BuildRequires:  pkgconfig(wayland-cursor) >= %{wayland_version}
-BuildRequires:  pkgconfig(wayland-egl) >= %{wayland_version}
-BuildRequires:  pkgconfig(wayland-protocols) >= %{wayland_protocols_version}
-BuildRequires:  pkgconfig(xkbcommon)
-%endif
 BuildRequires:  sassc
 BuildRequires:  /usr/bin/xsltproc
 
@@ -77,11 +74,9 @@ Requires: cairo%{?_isa} >= %{cairo_version}
 Requires: cairo-gobject%{?_isa} >= %{cairo_version}
 Requires: glib2%{?_isa} >= %{glib2_version}
 Requires: libepoxy%{?_isa} >= %{epoxy_version}
-Requires: pango%{?_isa} >= %{pango_version}
-%if 0%{?with_wayland}
 Requires: libwayland-client%{?_isa} >= %{wayland_version}
 Requires: libwayland-cursor%{?_isa} >= %{wayland_version}
-%endif
+Requires: pango%{?_isa} >= %{pango_version}
 
 # required to support all the different image formats
 Requires: gdk-pixbuf2-modules%{?_isa}
@@ -129,9 +124,7 @@ for writing applications with version 4 of the GTK widget toolkit.
 export CFLAGS='-fno-strict-aliasing %optflags'
 %meson \
         -Dx11-backend=true \
-%if 0%{?with_wayland}
         -Dwayland-backend=true \
-%endif
 %if 0%{?with_broadway}
         -Dbroadway-backend=true \
 %endif
@@ -227,6 +220,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %changelog
 * Thu Sep 03 2020 Kalev Lember <klember@redhat.com> - 3.99.1-1
 - Update to 3.99.1
+- Drop wayland build conditionals
 
 * Mon Aug 17 2020 Jeff Law <law@redhat.com> - 3.99.0-2
 - Disable LTO on armv7hl
