@@ -17,7 +17,7 @@
 
 Name:           gtk4
 Version:        3.99.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
@@ -117,10 +117,6 @@ for writing applications with version 4 of the GTK widget toolkit.
 %autosetup -p1 -n gtk-%{version}
 
 %build
-# This package has the usual problems with LTO vs NEON on ARM.
-%ifarch armv7hl
-%define _lto_cflags %{nil}
-%endif
 export CFLAGS='-fno-strict-aliasing %optflags'
 %meson \
         -Dx11-backend=true \
@@ -218,6 +214,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
+* Mon Sep 28 2020 Jeff Law <law@redhat.com> - 3.99.1-2
+- Re-enable LTO as upstream GCC target/96939 has been fixed
+
 * Thu Sep 03 2020 Kalev Lember <klember@redhat.com> - 3.99.1-1
 - Update to 3.99.1
 - Drop wayland build conditionals
