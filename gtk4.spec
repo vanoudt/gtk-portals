@@ -16,8 +16,8 @@
 %global __provides_exclude_from ^%{_libdir}/gtk-4.0
 
 Name:           gtk4
-Version:        3.99.1
-Release:        2%{?dist}
+Version:        3.99.2
+Release:        1%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
@@ -214,6 +214,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
+* Tue Sep 29 2020 Kalev Lember <klember@redhat.com> - 3.99.2-1
+- Update to 3.99.2
+
 * Mon Sep 28 2020 Jeff Law <law@redhat.com> - 3.99.1-2
 - Re-enable LTO as upstream GCC target/96939 has been fixed
 
