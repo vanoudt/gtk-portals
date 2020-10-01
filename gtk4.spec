@@ -2,8 +2,8 @@
 %global with_broadway 1
 %endif
 
-%global glib2_version 2.63.1
-%global pango_version 1.45.0
+%global glib2_version 2.65.0
+%global pango_version 1.47.0
 %global cairo_version 1.14.0
 %global gdk_pixbuf_version 2.30.0
 %global wayland_protocols_version 1.20
@@ -17,7 +17,7 @@
 
 Name:           gtk4
 Version:        3.99.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
@@ -214,6 +214,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
+* Thu Oct 01 2020 Kalev Lember <klember@redhat.com> - 3.99.2-2
+- Update required pango and glib2 versions
+
 * Tue Sep 29 2020 Kalev Lember <klember@redhat.com> - 3.99.2-1
 - Update to 3.99.2
 
