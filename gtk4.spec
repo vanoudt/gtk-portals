@@ -170,6 +170,8 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_datadir}/glib-2.0/schemas/org.gtk.gtk4.Settings.Debug.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gtk.gtk4.Settings.EmojiChooser.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gtk.gtk4.Settings.FileChooser.gschema.xml
+%dir %{_datadir}/gtk-4.0
+%{_datadir}/gtk-4.0/emoji/
 %if 0%{?with_broadway}
 %{_bindir}/gtk4-broadwayd
 %{_mandir}/man1/gtk4-broadwayd.1*
@@ -198,7 +200,6 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_datadir}/gettext/
 %{_datadir}/gir-1.0
 %{_datadir}/glib-2.0/schemas/org.gtk.Demo4.gschema.xml
-%dir %{_datadir}/gtk-4.0
 %{_datadir}/gtk-4.0/gtk4builder.rng
 %{_datadir}/gtk-4.0/valgrind/
 %{_datadir}/metainfo/org.gtk.Demo4.appdata.xml
