@@ -124,6 +124,8 @@ export CFLAGS='-fno-strict-aliasing %optflags'
 %if 0%{?with_broadway}
         -Dbroadway-backend=true \
 %endif
+        -Dmedia-ffmpeg=disabled \
+        -Dmedia-gstreamer=enabled \
         -Dxinerama=enabled \
         -Dcolord=enabled \
         -Dgtk_doc=false \
