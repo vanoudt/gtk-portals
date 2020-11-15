@@ -17,12 +17,13 @@
 
 Name:           gtk4
 Version:        3.99.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
 URL:            https://www.gtk.org
 Source0:        https://download.gnome.org/sources/gtk/3.99/gtk-%{version}.tar.xz
+Patch0:         %{name}-gcc11.patch
 
 BuildRequires:  cups-devel
 BuildRequires:  desktop-file-utils
@@ -217,6 +218,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
+* Sun Nov 15 2020 Jeff Law <law@redhat.com> - 3.99.4-2
+- Fix bogus volatile caught by gcc-11
+
 * Thu Nov  5 2020 Kalev Lember <klember@redhat.com> - 3.99.4-1
 - Update to 3.99.4
 
