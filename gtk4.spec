@@ -17,7 +17,7 @@
 
 Name:           gtk4
 Version:        3.99.4
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
@@ -218,6 +218,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
+* Wed Dec 09 2020 Jeff Law <law@redhat.com> - 3.99.4-3
+- Avoid diagnostics for gcc-11 false positive out of bounds accesses
+
 * Sun Nov 15 2020 Jeff Law <law@redhat.com> - 3.99.4-2
 - Fix bogus volatile caught by gcc-11
 
