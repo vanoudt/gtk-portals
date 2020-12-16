@@ -157,7 +157,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %doc AUTHORS NEWS README.md
 %{_bindir}/gtk4-launch
 %{_bindir}/gtk4-update-icon-cache
-%{_libdir}/libgtk-4.so.*
+%{_libdir}/libgtk-4.so.1*
 %dir %{_libdir}/gtk-4.0
 %dir %{_libdir}/gtk-4.0/%{bin_version}
 %{_libdir}/gtk-4.0/%{bin_version}/media/
@@ -179,7 +179,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %endif
 
 %files devel -f gtk40-properties.lang
-%{_libdir}/lib*.so
+%{_libdir}/libgtk-4.so
 %{_includedir}/*
 %{_libdir}/pkgconfig/*
 %{_bindir}/gtk4-builder-tool
@@ -218,6 +218,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %changelog
 * Wed Dec 16 2020 Kalev Lember <klember@redhat.com> - 4.0.0-1
 - Update to 4.0.0
+- Tighten soname globs
 
 * Fri Dec 11 2020 Kalev Lember <klember@redhat.com> - 3.99.5-1
 - Update to 3.99.5
