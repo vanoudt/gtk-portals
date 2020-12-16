@@ -152,8 +152,6 @@ mkdir -p $RPM_BUILD_ROOT%{_libdir}/gtk-4.0/%{bin_version}/theming-engines
 %check
 desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 
-%ldconfig_scriptlets
-
 %files -f gtk40.lang
 %license COPYING
 %doc AUTHORS NEWS README.md
