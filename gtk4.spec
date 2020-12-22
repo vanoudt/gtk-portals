@@ -17,7 +17,7 @@
 
 Name:           gtk4
 Version:        4.0.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
@@ -28,6 +28,8 @@ Patch0:         %{name}-gcc11.patch
 BuildRequires:  cups-devel
 BuildRequires:  desktop-file-utils
 BuildRequires:  docbook-style-xsl
+BuildRequires:  gtk-doc
+BuildRequires:  pandoc
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
 BuildRequires:  gettext
@@ -112,7 +114,17 @@ Requires: gtk4%{?_isa} = %{version}-%{release}
 
 %description devel
 This package contains the libraries and header files that are needed
-for writing applications with version 4 of the GTK widget toolkit.
+for writing applications with version 4 of the GTK widget toolkit. If
+you plan to develop applications with GTK, consider installing the
+gtk4-devel-docs package.
+
+%package devel-docs
+Summary: Developer documentation for GTK
+Requires: gtk4 = %{version}-%{release}
+
+%description devel-docs
+This package contains developer documentation for version 4 of the GTK
+widget toolkit.
 
 %prep
 %autosetup -p1 -n gtk-%{version}
@@ -129,11 +141,13 @@ export CFLAGS='-fno-strict-aliasing %optflags'
         -Dmedia-gstreamer=enabled \
         -Dxinerama=enabled \
         -Dcolord=enabled \
-        -Dgtk_doc=false \
+        -Dgtk_doc=true \
         -Dman-pages=true \
         -Dinstall-tests=false
 
 %meson_build
+# Workaround for https://github.com/mesonbuild/meson/issues/8117
+%meson_build gtk4-doc:custom
 
 %install
 %meson_install
@@ -215,7 +229,13 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-query-settings.1*
 %{_mandir}/man1/gtk4-widget-factory.1*
 
+%files devel-docs
+%{_datadir}/gtk-doc
+
 %changelog
+* Tue Dec 22 14:13:09 +04 2020 Marc-André Lureau <marcandre.lureau@redhat.com> - 4.0.0-2
+- Add back gtk4-devel-docs
+
 * Wed Dec 16 2020 Kalev Lember <klember@redhat.com> - 4.0.0-1
 - Update to 4.0.0
 - Tighten soname globs
