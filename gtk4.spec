@@ -23,6 +23,7 @@ Summary:        GTK graphical user interface library
 License:        LGPLv2+
 URL:            https://www.gtk.org
 Source0:        https://download.gnome.org/sources/gtk/4.0/gtk-%{version}.tar.xz
+Patch0:         gtk4-gcc11.patch
 
 BuildRequires:  cups-devel
 BuildRequires:  desktop-file-utils
