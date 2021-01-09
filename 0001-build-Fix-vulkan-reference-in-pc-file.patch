@@ -1,0 +1,28 @@
+From 7d5826ccf7a8d5ad39f370a3f214e4811ca1075b Mon Sep 17 00:00:00 2001
+From: Jan Tojnar <jtojnar@gmail.com>
+Date: Sun, 27 Dec 2020 06:42:29 +0100
+Subject: [PATCH] build: Fix vulkan reference in pc file
+
+A mistake in string concatenation caused the vulcan dependency to be omitted.
+
+Fixes: https://gitlab.gnome.org/GNOME/gtk/-/issues/3517
+---
+ meson.build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meson.build b/meson.build
+index bb58717f6a..60e7729a8e 100644
+--- a/meson.build
++++ b/meson.build
+@@ -723,7 +723,7 @@ if cairogobj_pkg_found
+ endif
+ 
+ if vulkan_pkg_found
+-  gdk_packages += 'vulkan'
++  gdk_packages += ' vulkan'
+ endif
+ 
+ pkgconf.set('GDK_PACKAGES', gdk_packages)
+-- 
+2.29.2
+
