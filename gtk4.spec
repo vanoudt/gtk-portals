@@ -16,15 +16,13 @@
 %global __provides_exclude_from ^%{_libdir}/gtk-4.0
 
 Name:           gtk4
-Version:        4.0.0
-Release:        3%{?dist}
+Version:        4.0.1
+Release:        1%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
 URL:            https://www.gtk.org
 Source0:        https://download.gnome.org/sources/gtk/4.0/gtk-%{version}.tar.xz
-Patch0:         %{name}-gcc11.patch
-Patch1:         0001-build-Fix-vulkan-reference-in-pc-file.patch
 
 BuildRequires:  cups-devel
 BuildRequires:  desktop-file-utils
@@ -234,6 +232,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_datadir}/gtk-doc
 
 %changelog
+* Sat Jan 09 2021 Kalev Lember <klember@redhat.com> - 4.0.1-1
+- Update to 4.0.1
+
 * Sat Jan 09 2021 Kalev Lember <klember@redhat.com> - 4.0.0-3
 - Fix vulkan reference in pc file
 
