@@ -17,12 +17,18 @@
 
 Name:           gtk4
 Version:        4.0.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
 URL:            https://www.gtk.org
 Source0:        https://download.gnome.org/sources/gtk/4.0/gtk-%{version}.tar.xz
+
+# Generated with patch0
+Source1:        HighContrast-dark.css
+
+# https://gitlab.gnome.org/GNOME/gtk/-/merge_requests/3095
+Patch0:         0001-dist-Fix-css-theme-disting-after-HighContrast-dark-c.patch
 
 BuildRequires:  cups-devel
 BuildRequires:  desktop-file-utils
@@ -62,7 +68,6 @@ BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  pkgconfig(xrandr)
 BuildRequires:  pkgconfig(xrender)
 BuildRequires:  pkgconfig(xrender)
-BuildRequires:  sassc
 BuildRequires:  /usr/bin/xsltproc
 
 # standard icons
@@ -128,6 +133,9 @@ widget toolkit.
 %prep
 %autosetup -p1 -n gtk-%{version}
 
+# Generated with patch0
+cp -a %{SOURCE1} gtk/theme/HighContrast/HighContrast-dark.css
+
 %build
 export CFLAGS='-fno-strict-aliasing %optflags'
 %meson \
@@ -140,6 +148,7 @@ export CFLAGS='-fno-strict-aliasing %optflags'
         -Dmedia-gstreamer=enabled \
         -Dxinerama=enabled \
         -Dcolord=enabled \
+        -Dsassc=disabled \
         -Dgtk_doc=true \
         -Dman-pages=true \
         -Dinstall-tests=false
@@ -232,6 +241,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_datadir}/gtk-doc
 
 %changelog
+* Tue Jan 19 2021 Kalev Lember <klember@redhat.com> - 4.0.2-2
+- Avoid rebuilding stylesheets with sassc during the build
+
 * Tue Jan 19 2021 Kalev Lember <klember@redhat.com> - 4.0.2-1
 - Update to 4.0.2
 
