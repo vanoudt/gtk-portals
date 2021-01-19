@@ -2,7 +2,7 @@
 %global with_broadway 1
 %endif
 
-%global glib2_version 2.65.0
+%global glib2_version 2.66.0
 %global pango_version 1.47.0
 %global cairo_version 1.14.0
 %global gdk_pixbuf_version 2.30.0
@@ -16,14 +16,13 @@
 %global __provides_exclude_from ^%{_libdir}/gtk-4.0
 
 Name:           gtk4
-Version:        4.0.1
+Version:        4.0.2
 Release:        1%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
 URL:            https://www.gtk.org
 Source0:        https://download.gnome.org/sources/gtk/4.0/gtk-%{version}.tar.xz
-Patch0:         gtk4-gcc11.patch
 
 BuildRequires:  cups-devel
 BuildRequires:  desktop-file-utils
@@ -233,6 +232,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_datadir}/gtk-doc
 
 %changelog
+* Tue Jan 19 2021 Kalev Lember <klember@redhat.com> - 4.0.2-1
+- Update to 4.0.2
+
 * Sat Jan 09 2021 Kalev Lember <klember@redhat.com> - 4.0.1-1
 - Update to 4.0.1
 
