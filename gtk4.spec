@@ -17,7 +17,7 @@
 
 Name:           gtk4
 Version:        4.0.2
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
@@ -241,6 +241,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_datadir}/gtk-doc
 
 %changelog
+* Tue Jan 26 2021 Fedora Release Engineering <releng@fedoraproject.org> - 4.0.2-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
+
 * Tue Jan 19 2021 Kalev Lember <klember@redhat.com> - 4.0.2-2
 - Avoid rebuilding stylesheets with sassc during the build
 
