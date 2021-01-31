@@ -16,19 +16,13 @@
 %global __provides_exclude_from ^%{_libdir}/gtk-4.0
 
 Name:           gtk4
-Version:        4.0.2
-Release:        3%{?dist}
+Version:        4.1.0
+Release:        1%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
 URL:            https://www.gtk.org
-Source0:        https://download.gnome.org/sources/gtk/4.0/gtk-%{version}.tar.xz
-
-# Generated with patch0
-Source1:        HighContrast-dark.css
-
-# https://gitlab.gnome.org/GNOME/gtk/-/merge_requests/3095
-Patch0:         0001-dist-Fix-css-theme-disting-after-HighContrast-dark-c.patch
+Source0:        https://download.gnome.org/sources/gtk/4.1/gtk-%{version}.tar.xz
 
 BuildRequires:  cups-devel
 BuildRequires:  desktop-file-utils
@@ -132,9 +126,6 @@ widget toolkit.
 
 %prep
 %autosetup -p1 -n gtk-%{version}
-
-# Generated with patch0
-cp -a %{SOURCE1} gtk/theme/HighContrast/HighContrast-dark.css
 
 %build
 export CFLAGS='-fno-strict-aliasing %optflags'
@@ -241,6 +232,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_datadir}/gtk-doc
 
 %changelog
+* Sun Jan 31 2021 Kalev Lember <klember@redhat.com> - 4.1.0-1
+- Update to 4.1.0
+
 * Tue Jan 26 2021 Fedora Release Engineering <releng@fedoraproject.org> - 4.0.2-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
 
