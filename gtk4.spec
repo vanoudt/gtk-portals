@@ -17,7 +17,7 @@
 
 Name:           gtk4
 Version:        4.1.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
@@ -128,7 +128,7 @@ widget toolkit.
 %autosetup -p1 -n gtk-%{version}
 
 %build
-export CFLAGS='-fno-strict-aliasing %optflags'
+export CFLAGS='-fno-strict-aliasing -DG_DISABLE_CAST_CHECKS -DG_DISABLE_ASSERT %optflags'
 %meson \
         -Dx11-backend=true \
         -Dwayland-backend=true \
@@ -232,6 +232,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_datadir}/gtk-doc
 
 %changelog
+* Mon Feb 01 2021 Kalev Lember <klember@redhat.com> - 4.1.0-2
+- Disable asserts and cast checks
+
 * Sun Jan 31 2021 Kalev Lember <klember@redhat.com> - 4.1.0-1
 - Update to 4.1.0
 
