@@ -17,12 +17,15 @@
 
 Name:           gtk4
 Version:        4.1.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
 URL:            https://www.gtk.org
 Source0:        https://download.gnome.org/sources/gtk/4.1/gtk-%{version}.tar.xz
+
+# Backported from upstream
+Patch0:         0001-gdk-wayland-Look-for-font-settings-recursively.patch
 
 BuildRequires:  cups-devel
 BuildRequires:  desktop-file-utils
@@ -232,6 +235,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_datadir}/gtk-doc
 
 %changelog
+* Fri Feb 19 2021 Kalev Lember <klember@redhat.com> - 4.1.0-3
+- Backport upstream patch to fix a settings schema loading issue on Wayland
+
 * Mon Feb 01 2021 Kalev Lember <klember@redhat.com> - 4.1.0-2
 - Disable asserts and cast checks
 
