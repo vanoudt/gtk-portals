@@ -47,6 +47,7 @@ BuildRequires:  pkgconfig(gstreamer-player-1.0)
 BuildRequires:  pkgconfig(json-glib-1.0)
 BuildRequires:  pkgconfig(pango) >= %{pango_version}
 BuildRequires:  pkgconfig(rest-0.7)
+BuildRequires:  pkgconfig(sysprof-capture-4)
 BuildRequires:  pkgconfig(vulkan)
 BuildRequires:  pkgconfig(wayland-client) >= %{wayland_version}
 BuildRequires:  pkgconfig(wayland-cursor) >= %{wayland_version}
@@ -138,6 +139,7 @@ export CFLAGS='-fno-strict-aliasing -DG_DISABLE_CAST_CHECKS -DG_DISABLE_ASSERT %
         -Dmedia-ffmpeg=disabled \
         -Dmedia-gstreamer=enabled \
         -Dxinerama=enabled \
+        -Dsysprof=enabled \
         -Dcolord=enabled \
         -Dsassc=disabled \
         -Dgtk_doc=true \
@@ -234,6 +236,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %changelog
 * Wed Feb 24 2021 Kalev Lember <klember@redhat.com> - 4.1.1-1
 - Update to 4.1.1
+- Enable sysprof support
 
 * Fri Feb 19 2021 Kalev Lember <klember@redhat.com> - 4.1.0-3
 - Backport upstream patch to fix a settings schema loading issue on Wayland
