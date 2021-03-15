@@ -81,11 +81,7 @@ Requires: pango%{?_isa} >= %{pango_version}
 Requires: gdk-pixbuf2-modules%{?_isa}
 
 # make sure we have a reasonable gsettings backend
-%if 0%{?fedora}
 Recommends: dconf%{?_isa}
-%else
-Requires: dconf%{?_isa}
-%endif
 
 # Removed in F34
 Obsoletes: gtk4-devel-docs < 4.1.2
