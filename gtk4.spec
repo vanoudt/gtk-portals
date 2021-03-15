@@ -60,7 +60,6 @@ BuildRequires:  pkgconfig(xinerama)
 BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  pkgconfig(xrandr)
 BuildRequires:  pkgconfig(xrender)
-BuildRequires:  pkgconfig(xrender)
 BuildRequires:  /usr/bin/xsltproc
 
 # standard icons
