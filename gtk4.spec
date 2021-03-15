@@ -87,12 +87,6 @@ Recommends: dconf%{?_isa}
 Requires: dconf%{?_isa}
 %endif
 
-# Removed in F29
-Obsoletes: gtk4-immodules < 3.94.0
-Obsoletes: gtk4-immodule-xim < 3.94.0
-
-# Removed in F30
-Obsoletes: gtk4-tests < 3.96.0
 # Removed in F34
 Obsoletes: gtk4-devel-docs < 4.1.2
 
@@ -219,6 +213,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 * Mon Mar 15 2021 Kalev Lember <klember@redhat.com> - 4.1.2-1
 - Update to 4.1.2
 - Disable gtk-doc support as we don't have gi-docgen in Fedora yet
+- Remove old obsoletes
 
 * Wed Feb 24 2021 Kalev Lember <klember@redhat.com> - 4.1.1-1
 - Update to 4.1.1
