@@ -16,7 +16,7 @@
 %global __provides_exclude_from ^%{_libdir}/gtk-4.0
 
 Name:           gtk4
-Version:        4.1.1
+Version:        4.1.2
 Release:        1%{?dist}
 Summary:        GTK graphical user interface library
 
@@ -27,8 +27,6 @@ Source0:        https://download.gnome.org/sources/gtk/4.1/gtk-%{version}.tar.xz
 BuildRequires:  cups-devel
 BuildRequires:  desktop-file-utils
 BuildRequires:  docbook-style-xsl
-BuildRequires:  gtk-doc
-BuildRequires:  pandoc
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
 BuildRequires:  gettext
@@ -96,8 +94,8 @@ Obsoletes: gtk4-immodule-xim < 3.94.0
 
 # Removed in F30
 Obsoletes: gtk4-tests < 3.96.0
-# Removed in F32
-Obsoletes: gtk4-devel-docs < 3.98.3
+# Removed in F34
+Obsoletes: gtk4-devel-docs < 4.1.2
 
 %description
 GTK is a multi-platform toolkit for creating graphical user
@@ -113,17 +111,7 @@ Requires: gtk4%{?_isa} = %{version}-%{release}
 
 %description devel
 This package contains the libraries and header files that are needed
-for writing applications with version 4 of the GTK widget toolkit. If
-you plan to develop applications with GTK, consider installing the
-gtk4-devel-docs package.
-
-%package devel-docs
-Summary: Developer documentation for GTK
-Requires: gtk4 = %{version}-%{release}
-
-%description devel-docs
-This package contains developer documentation for version 4 of the GTK
-widget toolkit.
+for writing applications with version 4 of the GTK widget toolkit.
 
 %prep
 %autosetup -p1 -n gtk-%{version}
@@ -142,13 +130,11 @@ export CFLAGS='-fno-strict-aliasing -DG_DISABLE_CAST_CHECKS -DG_DISABLE_ASSERT %
         -Dsysprof=enabled \
         -Dcolord=enabled \
         -Dsassc=disabled \
-        -Dgtk_doc=true \
+        -Dgtk_doc=false \
         -Dman-pages=true \
         -Dinstall-tests=false
 
 %meson_build
-# Workaround for https://github.com/mesonbuild/meson/issues/8117
-%meson_build gtk4-doc:custom
 
 %install
 %meson_install
@@ -230,10 +216,11 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-query-settings.1*
 %{_mandir}/man1/gtk4-widget-factory.1*
 
-%files devel-docs
-%{_datadir}/gtk-doc
-
 %changelog
+* Mon Mar 15 2021 Kalev Lember <klember@redhat.com> - 4.1.2-1
+- Update to 4.1.2
+- Disable gtk-doc support as we don't have gi-docgen in Fedora yet
+
 * Wed Feb 24 2021 Kalev Lember <klember@redhat.com> - 4.1.1-1
 - Update to 4.1.1
 - Enable sysprof support
