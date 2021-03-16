@@ -45,6 +45,7 @@ BuildRequires:  pkgconfig(gstreamer-player-1.0)
 BuildRequires:  pkgconfig(json-glib-1.0)
 BuildRequires:  pkgconfig(pango) >= %{pango_version}
 BuildRequires:  pkgconfig(rest-0.7)
+BuildRequires:  pkgconfig(sysprof-4)
 BuildRequires:  pkgconfig(sysprof-capture-4)
 BuildRequires:  pkgconfig(vulkan)
 BuildRequires:  pkgconfig(wayland-client) >= %{wayland_version}
