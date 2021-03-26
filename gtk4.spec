@@ -17,7 +17,7 @@
 
 Name:           gtk4
 Version:        4.1.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
@@ -207,6 +207,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
+* Fri Mar 26 2021 Kalev Lember <klember@redhat.com> - 4.1.2-2
+- Rebuild to fix sysprof-capture symbols leaking into libraries consuming it
+
 * Mon Mar 15 2021 Kalev Lember <klember@redhat.com> - 4.1.2-1
 - Update to 4.1.2
 - Disable gtk-doc support as we don't have gi-docgen in Fedora yet
