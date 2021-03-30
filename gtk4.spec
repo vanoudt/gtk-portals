@@ -16,13 +16,13 @@
 %global __provides_exclude_from ^%{_libdir}/gtk-4.0
 
 Name:           gtk4
-Version:        4.1.2
-Release:        2%{?dist}
+Version:        4.2.0
+Release:        1%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
 URL:            https://www.gtk.org
-Source0:        https://download.gnome.org/sources/gtk/4.1/gtk-%{version}.tar.xz
+Source0:        https://download.gnome.org/sources/gtk/4.2/gtk-%{version}.tar.xz
 
 BuildRequires:  cups-devel
 BuildRequires:  desktop-file-utils
@@ -207,6 +207,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
+* Tue Mar 30 2021 Kalev Lember <klember@redhat.com> - 4.2.0-1
+- Update to 4.2.0
+
 * Fri Mar 26 2021 Kalev Lember <klember@redhat.com> - 4.1.2-2
 - Rebuild to fix sysprof-capture symbols leaking into libraries consuming it
 
