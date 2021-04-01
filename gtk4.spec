@@ -17,7 +17,7 @@
 
 Name:           gtk4
 Version:        4.2.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
@@ -47,7 +47,6 @@ BuildRequires:  pkgconfig(pango) >= %{pango_version}
 BuildRequires:  pkgconfig(rest-0.7)
 BuildRequires:  pkgconfig(sysprof-4)
 BuildRequires:  pkgconfig(sysprof-capture-4)
-BuildRequires:  pkgconfig(vulkan)
 BuildRequires:  pkgconfig(wayland-client) >= %{wayland_version}
 BuildRequires:  pkgconfig(wayland-cursor) >= %{wayland_version}
 BuildRequires:  pkgconfig(wayland-egl) >= %{wayland_version}
@@ -116,6 +115,7 @@ export CFLAGS='-fno-strict-aliasing -DG_DISABLE_CAST_CHECKS -DG_DISABLE_ASSERT %
 %endif
         -Dmedia-ffmpeg=disabled \
         -Dmedia-gstreamer=enabled \
+        -Dvulkan=disabled \
         -Dxinerama=enabled \
         -Dsysprof=enabled \
         -Dcolord=enabled \
@@ -207,6 +207,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
+* Thu Apr 01 2021 Kalev Lember <klember@redhat.com> - 4.2.0-2
+- Disable vulkan renderer
+
 * Tue Mar 30 2021 Kalev Lember <klember@redhat.com> - 4.2.0-1
 - Update to 4.2.0
 
