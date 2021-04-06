@@ -17,12 +17,16 @@
 
 Name:           gtk4
 Version:        4.2.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
 URL:            https://www.gtk.org
 Source0:        https://download.gnome.org/sources/gtk/4.2/gtk-%{version}.tar.xz
+
+# https://bugzilla.redhat.com/show_bug.cgi?id=1946133
+# https://gitlab.gnome.org/GNOME/gtk/-/merge_requests/3386
+Patch0:         3386.patch
 
 BuildRequires:  cups-devel
 BuildRequires:  desktop-file-utils
@@ -207,6 +211,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
+* Tue Apr 06 2021 Kalev Lember <klember@redhat.com> - 4.2.0-3
+- Backport upstream fix for typing apostrophes / single quotes (#1946133)
+
 * Thu Apr 01 2021 Kalev Lember <klember@redhat.com> - 4.2.0-2
 - Disable vulkan renderer
 
