@@ -17,7 +17,7 @@
 
 Name:           gtk4
 Version:        4.2.0
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
@@ -38,6 +38,7 @@ BuildRequires:  meson
 BuildRequires:  pkgconfig(avahi-gobject)
 BuildRequires:  pkgconfig(cairo) >= %{cairo_version}
 BuildRequires:  pkgconfig(cairo-gobject) >= %{cairo_version}
+BuildRequires:  pkgconfig(cloudproviders)
 BuildRequires:  pkgconfig(colord)
 BuildRequires:  pkgconfig(egl)
 BuildRequires:  pkgconfig(epoxy)
@@ -121,6 +122,7 @@ export CFLAGS='-fno-strict-aliasing -DG_DISABLE_CAST_CHECKS -DG_DISABLE_ASSERT %
         -Dmedia-gstreamer=enabled \
         -Dvulkan=disabled \
         -Dxinerama=enabled \
+        -Dcloudproviders=enabled \
         -Dsysprof=enabled \
         -Dcolord=enabled \
         -Dsassc=disabled \
@@ -211,6 +213,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
+* Tue Apr 20 2021 Kalev Lember <klember@redhat.com> - 4.2.0-4
+- Enable cloudproviders support (#1951539)
+
 * Tue Apr 06 2021 Kalev Lember <klember@redhat.com> - 4.2.0-3
 - Backport upstream fix for typing apostrophes / single quotes (#1946133)
 
