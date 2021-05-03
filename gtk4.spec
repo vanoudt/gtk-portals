@@ -17,7 +17,7 @@
 
 Name:           gtk4
 Version:        4.2.0
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
@@ -35,6 +35,12 @@ BuildRequires:  gcc
 BuildRequires:  gcc-c++
 BuildRequires:  gettext
 BuildRequires:  meson
+BuildRequires:  python3-jinja2
+BuildRequires:  python3-markdown
+BuildRequires:  python3-markupsafe
+BuildRequires:  python3-pygments
+BuildRequires:  python3-toml
+BuildRequires:  python3-typogrify
 BuildRequires:  pkgconfig(avahi-gobject)
 BuildRequires:  pkgconfig(cairo) >= %{cairo_version}
 BuildRequires:  pkgconfig(cairo-gobject) >= %{cairo_version}
@@ -88,9 +94,6 @@ Requires: gdk-pixbuf2-modules%{?_isa}
 # make sure we have a reasonable gsettings backend
 Recommends: dconf%{?_isa}
 
-# Removed in F34
-Obsoletes: gtk4-devel-docs < 4.1.2
-
 %description
 GTK is a multi-platform toolkit for creating graphical user
 interfaces. Offering a complete set of widgets, GTK is suitable for
@@ -106,6 +109,14 @@ Requires: gtk4%{?_isa} = %{version}-%{release}
 %description devel
 This package contains the libraries and header files that are needed
 for writing applications with version 4 of the GTK widget toolkit.
+
+%package devel-docs
+Summary: Developer documentation for GTK
+Requires: gtk4%{?_isa} = %{version}-%{release}
+
+%description devel-docs
+This package contains developer documentation for version 4 of the GTK
+widget toolkit.
 
 %prep
 %autosetup -p1 -n gtk-%{version}
@@ -126,7 +137,7 @@ export CFLAGS='-fno-strict-aliasing -DG_DISABLE_CAST_CHECKS -DG_DISABLE_ASSERT %
         -Dsysprof=enabled \
         -Dcolord=enabled \
         -Dsassc=disabled \
-        -Dgtk_doc=false \
+        -Dgtk_doc=true \
         -Dman-pages=true \
         -Dinstall-tests=false
 
@@ -212,7 +223,13 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-query-settings.1*
 %{_mandir}/man1/gtk4-widget-factory.1*
 
+%files devel-docs
+%{_datadir}/doc/gtk4/reference
+
 %changelog
+* Mon May 03 2021 Marc-André Lureau <marcandre.lureau@redhat.com> - 4.2.0-5
+- Re-enable documentation.
+
 * Tue Apr 20 2021 Kalev Lember <klember@redhat.com> - 4.2.0-4
 - Enable cloudproviders support (#1951539)
 
