@@ -16,17 +16,13 @@
 %global __provides_exclude_from ^%{_libdir}/gtk-4.0
 
 Name:           gtk4
-Version:        4.2.0
-Release:        5%{?dist}
+Version:        4.2.1
+Release:        1%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
 URL:            https://www.gtk.org
 Source0:        https://download.gnome.org/sources/gtk/4.2/gtk-%{version}.tar.xz
-
-# https://bugzilla.redhat.com/show_bug.cgi?id=1946133
-# https://gitlab.gnome.org/GNOME/gtk/-/merge_requests/3386
-Patch0:         3386.patch
 
 BuildRequires:  cups-devel
 BuildRequires:  desktop-file-utils
@@ -224,9 +220,18 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %files devel-docs
-%{_datadir}/doc/gtk4/reference
+%{_datadir}/doc/gdk4/
+%{_datadir}/doc/gdk4-wayland/
+%{_datadir}/doc/gdk4-wayland/
+%{_datadir}/doc/gdk4-x11/
+%{_datadir}/doc/gdk4-x11/
+%{_datadir}/doc/gsk4/
+%{_datadir}/doc/gtk4/
 
 %changelog
+* Wed May 05 2021 Kalev Lember <klember@redhat.com> - 4.2.1-1
+- Update to 4.2.1
+
 * Mon May 03 2021 Marc-André Lureau <marcandre.lureau@redhat.com> - 4.2.0-5
 - Re-enable documentation.
 
