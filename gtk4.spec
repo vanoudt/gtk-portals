@@ -35,12 +35,6 @@ BuildRequires:  gcc
 BuildRequires:  gcc-c++
 BuildRequires:  gettext
 BuildRequires:  meson
-BuildRequires:  python3-jinja2
-BuildRequires:  python3-markdown
-BuildRequires:  python3-markupsafe
-BuildRequires:  python3-pygments
-BuildRequires:  python3-toml
-BuildRequires:  python3-typogrify
 BuildRequires:  pkgconfig(avahi-gobject)
 BuildRequires:  pkgconfig(cairo) >= %{cairo_version}
 BuildRequires:  pkgconfig(cairo-gobject) >= %{cairo_version}
@@ -71,6 +65,12 @@ BuildRequires:  pkgconfig(xinerama)
 BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  pkgconfig(xrandr)
 BuildRequires:  pkgconfig(xrender)
+BuildRequires:  python3-jinja2
+BuildRequires:  python3-markdown
+BuildRequires:  python3-markupsafe
+BuildRequires:  python3-pygments
+BuildRequires:  python3-toml
+BuildRequires:  python3-typogrify
 BuildRequires:  /usr/bin/xsltproc
 
 # standard icons
