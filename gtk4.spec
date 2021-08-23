@@ -117,15 +117,9 @@ widget toolkit.
 %build
 export CFLAGS='-fno-strict-aliasing -DG_DISABLE_CAST_CHECKS -DG_DISABLE_ASSERT %optflags'
 %meson \
-        -Dx11-backend=true \
-        -Dwayland-backend=true \
 %if 0%{?with_broadway}
         -Dbroadway-backend=true \
 %endif
-        -Dmedia-ffmpeg=disabled \
-        -Dmedia-gstreamer=enabled \
-        -Dvulkan=disabled \
-        -Dxinerama=enabled \
         -Dcloudproviders=enabled \
         -Dsysprof=enabled \
         -Dcolord=enabled \
