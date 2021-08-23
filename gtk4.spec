@@ -32,6 +32,7 @@ BuildRequires:  docbook-style-xsl
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
 BuildRequires:  gettext
+BuildRequires:  gi-docgen
 BuildRequires:  meson
 BuildRequires:  pkgconfig(avahi-gobject)
 BuildRequires:  pkgconfig(cairo) >= %{cairo_version}
@@ -63,12 +64,6 @@ BuildRequires:  pkgconfig(xinerama)
 BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  pkgconfig(xrandr)
 BuildRequires:  pkgconfig(xrender)
-BuildRequires:  python3-jinja2
-BuildRequires:  python3-markdown
-BuildRequires:  python3-markupsafe
-BuildRequires:  python3-pygments
-BuildRequires:  python3-toml
-BuildRequires:  python3-typogrify
 BuildRequires:  /usr/bin/xsltproc
 
 # standard icons
@@ -232,6 +227,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %changelog
 * Mon Aug 23 2021 Kalev Lember <klember@redhat.com> - 4.4.0-1
 - Update to 4.4.0
+- Switch to using new gi-docgen package instead of the bundled copy
 
 * Thu Jul 22 2021 Fedora Release Engineering <releng@fedoraproject.org> - 4.2.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
