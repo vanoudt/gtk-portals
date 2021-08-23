@@ -6,8 +6,8 @@
 %global pango_version 1.47.0
 %global cairo_version 1.14.0
 %global gdk_pixbuf_version 2.30.0
-%global wayland_protocols_version 1.20
-%global wayland_version 1.14.91
+%global wayland_protocols_version 1.21
+%global wayland_version 1.16.91
 %global epoxy_version 1.4
 
 %global bin_version 4.0.0
@@ -16,13 +16,15 @@
 %global __provides_exclude_from ^%{_libdir}/gtk-4.0
 
 Name:           gtk4
-Version:        4.2.1
-Release:        2%{?dist}
+Version:        4.4.0
+Release:        1%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
 URL:            https://www.gtk.org
-Source0:        https://download.gnome.org/sources/gtk/4.2/gtk-%{version}.tar.xz
+Source0:        https://download.gnome.org/sources/gtk/4.4/gtk-%{version}.tar.xz
+# Backported from upstream
+Patch0:         0001-build-Fix-detection-for-pre-compiled-css-files.patch
 
 BuildRequires:  cups-devel
 BuildRequires:  desktop-file-utils
@@ -132,7 +134,6 @@ export CFLAGS='-fno-strict-aliasing -DG_DISABLE_CAST_CHECKS -DG_DISABLE_ASSERT %
         -Dcloudproviders=enabled \
         -Dsysprof=enabled \
         -Dcolord=enabled \
-        -Dsassc=disabled \
         -Dgtk_doc=true \
         -Dman-pages=true \
         -Dinstall-tests=false
@@ -229,6 +230,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_datadir}/doc/gtk4/
 
 %changelog
+* Mon Aug 23 2021 Kalev Lember <klember@redhat.com> - 4.4.0-1
+- Update to 4.4.0
+
 * Thu Jul 22 2021 Fedora Release Engineering <releng@fedoraproject.org> - 4.2.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
 
