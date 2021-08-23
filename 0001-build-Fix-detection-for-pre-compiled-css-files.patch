@@ -1,4 +1,4 @@
-From c4266327ce7a76558f238692e0e8a4e5788fa646 Mon Sep 17 00:00:00 2001
+From 552a4b2c82f41c1dbba410b825673cf67d089b68 Mon Sep 17 00:00:00 2001
 From: Kalev Lember <klember@redhat.com>
 Date: Mon, 23 Aug 2021 15:38:46 +0200
 Subject: [PATCH] build: Fix detection for pre-compiled css files
@@ -12,7 +12,7 @@ instead of themes/Adwaita/.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/gtk/meson.build b/gtk/meson.build
-index fa66764c50..4ba89f2298 100644
+index fa66764c50..bfb5105fe5 100644
 --- a/gtk/meson.build
 +++ b/gtk/meson.build
 @@ -842,7 +842,7 @@ gtk_gresources_xml = configure_file(output: 'gtk.gresources.xml',
@@ -20,7 +20,7 @@ index fa66764c50..4ba89f2298 100644
  theme_deps = []
  # For git checkouts, but not for tarballs...
 -if not fs.exists('theme/Adwaita/Adwaita.css')
-+if not fs.exists('theme/Default/gtk-light.css')
++if not fs.exists('theme/Default/Default-light.css')
    # ... build the theme files
    sassc = find_program('sassc', required: false)
    if not sassc.found()
