@@ -37,7 +37,6 @@ BuildRequires:  meson
 BuildRequires:  pkgconfig(avahi-gobject)
 BuildRequires:  pkgconfig(cairo) >= %{cairo_version}
 BuildRequires:  pkgconfig(cairo-gobject) >= %{cairo_version}
-BuildRequires:  pkgconfig(cloudproviders)
 BuildRequires:  pkgconfig(colord)
 BuildRequires:  pkgconfig(egl)
 BuildRequires:  pkgconfig(epoxy)
@@ -120,7 +119,6 @@ export CFLAGS='-fno-strict-aliasing -DG_DISABLE_CAST_CHECKS -DG_DISABLE_ASSERT %
 %if 0%{?with_broadway}
         -Dbroadway-backend=true \
 %endif
-        -Dcloudproviders=enabled \
         -Dsysprof=enabled \
         -Dcolord=enabled \
         -Dgtk_doc=true \
@@ -222,6 +220,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 * Mon Aug 23 2021 Kalev Lember <klember@redhat.com> - 4.4.0-1
 - Update to 4.4.0
 - Switch to using new gi-docgen package instead of the bundled copy
+- Remove cloudproviders support again, as per upstream suggestion
 
 * Thu Jul 22 2021 Fedora Release Engineering <releng@fedoraproject.org> - 4.2.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
