@@ -17,7 +17,7 @@
 
 Name:           gtk4
 Version:        4.4.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
@@ -110,6 +110,13 @@ Requires: gtk4%{?_isa} = %{version}-%{release}
 This package contains developer documentation for version 4 of the GTK
 widget toolkit.
 
+%package devel-tools
+Summary: Developer tools for GTK
+Requires: gtk4%{?_isa} = %{version}-%{release}
+
+%description devel-tools
+This package contains helpful applications for developers using GTK.
+
 %prep
 %autosetup -p1 -n gtk-%{version}
 
@@ -175,37 +182,15 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_includedir}/*
 %{_libdir}/pkgconfig/*
 %{_bindir}/gtk4-builder-tool
-%{_bindir}/gtk4-demo
 %{_bindir}/gtk4-encode-symbolic-svg
-%{_bindir}/gtk4-icon-browser
 %{_bindir}/gtk4-query-settings
-%{_datadir}/applications/org.gtk.Demo4.desktop
-%{_datadir}/applications/org.gtk.IconBrowser4.desktop
-%{_datadir}/applications/org.gtk.PrintEditor4.desktop
-%{_datadir}/applications/org.gtk.WidgetFactory4.desktop
-%{_datadir}/icons/hicolor/*/apps/org.gtk.Demo4*.svg
-%{_datadir}/icons/hicolor/*/apps/org.gtk.IconBrowser4*.svg
-%{_datadir}/icons/hicolor/*/apps/org.gtk.PrintEditor4*.svg
-%{_datadir}/icons/hicolor/*/apps/org.gtk.WidgetFactory4*.svg
-%{_bindir}/gtk4-demo-application
-%{_bindir}/gtk4-print-editor
-%{_bindir}/gtk4-widget-factory
 %{_datadir}/gettext/
 %{_datadir}/gir-1.0
-%{_datadir}/glib-2.0/schemas/org.gtk.Demo4.gschema.xml
 %{_datadir}/gtk-4.0/gtk4builder.rng
 %{_datadir}/gtk-4.0/valgrind/
-%{_datadir}/metainfo/org.gtk.Demo4.appdata.xml
-%{_datadir}/metainfo/org.gtk.IconBrowser4.appdata.xml
-%{_datadir}/metainfo/org.gtk.PrintEditor4.appdata.xml
-%{_datadir}/metainfo/org.gtk.WidgetFactory4.appdata.xml
 %{_mandir}/man1/gtk4-builder-tool.1*
-%{_mandir}/man1/gtk4-demo.1*
-%{_mandir}/man1/gtk4-demo-application.1*
 %{_mandir}/man1/gtk4-encode-symbolic-svg.1*
-%{_mandir}/man1/gtk4-icon-browser.1*
 %{_mandir}/man1/gtk4-query-settings.1*
-%{_mandir}/man1/gtk4-widget-factory.1*
 
 %files devel-docs
 %{_datadir}/doc/gdk4/
@@ -216,7 +201,34 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_datadir}/doc/gsk4/
 %{_datadir}/doc/gtk4/
 
+%files devel-tools
+%{_bindir}/gtk4-demo
+%{_bindir}/gtk4-demo-application
+%{_bindir}/gtk4-icon-browser
+%{_bindir}/gtk4-print-editor
+%{_bindir}/gtk4-widget-factory
+%{_datadir}/applications/org.gtk.Demo4.desktop
+%{_datadir}/applications/org.gtk.IconBrowser4.desktop
+%{_datadir}/applications/org.gtk.PrintEditor4.desktop
+%{_datadir}/applications/org.gtk.WidgetFactory4.desktop
+%{_datadir}/icons/hicolor/*/apps/org.gtk.Demo4*.svg
+%{_datadir}/icons/hicolor/*/apps/org.gtk.IconBrowser4*.svg
+%{_datadir}/icons/hicolor/*/apps/org.gtk.PrintEditor4*.svg
+%{_datadir}/icons/hicolor/*/apps/org.gtk.WidgetFactory4*.svg
+%{_datadir}/glib-2.0/schemas/org.gtk.Demo4.gschema.xml
+%{_datadir}/metainfo/org.gtk.Demo4.appdata.xml
+%{_datadir}/metainfo/org.gtk.IconBrowser4.appdata.xml
+%{_datadir}/metainfo/org.gtk.PrintEditor4.appdata.xml
+%{_datadir}/metainfo/org.gtk.WidgetFactory4.appdata.xml
+%{_mandir}/man1/gtk4-demo.1*
+%{_mandir}/man1/gtk4-demo-application.1*
+%{_mandir}/man1/gtk4-icon-browser.1*
+%{_mandir}/man1/gtk4-widget-factory.1*
+
 %changelog
+* Wed Sep 02 2021 Michael Catanzaro <mcatanzaro@redhat.com> - 4.4.0-2
+- Split developer tools out to devel-tools subpackage
+
 * Mon Aug 23 2021 Kalev Lember <klember@redhat.com> - 4.4.0-1
 - Update to 4.4.0
 - Switch to using new gi-docgen package instead of the bundled copy
