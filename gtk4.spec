@@ -226,7 +226,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
-* Wed Sep 02 2021 Michael Catanzaro <mcatanzaro@redhat.com> - 4.4.0-2
+* Thu Sep 02 2021 Michael Catanzaro <mcatanzaro@redhat.com> - 4.4.0-2
 - Split developer tools out to devel-tools subpackage
 
 * Mon Aug 23 2021 Kalev Lember <klember@redhat.com> - 4.4.0-1
