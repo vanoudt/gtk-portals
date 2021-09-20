@@ -17,7 +17,7 @@
 
 Name:           gtk4
 Version:        4.4.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
@@ -146,7 +146,6 @@ rm $RPM_BUILD_ROOT%{_mandir}/man1/gtk4-broadwayd.1*
 
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/gtk-4.0
 mkdir -p $RPM_BUILD_ROOT%{_libdir}/gtk-4.0/modules
-mkdir -p $RPM_BUILD_ROOT%{_libdir}/gtk-4.0/%{bin_version}/theming-engines
 
 %check
 desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
@@ -161,7 +160,6 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %dir %{_libdir}/gtk-4.0/%{bin_version}
 %{_libdir}/gtk-4.0/%{bin_version}/media/
 %{_libdir}/gtk-4.0/%{bin_version}/printbackends/
-%{_libdir}/gtk-4.0/%{bin_version}/theming-engines/
 %{_libdir}/gtk-4.0/modules
 %{_libdir}/girepository-1.0
 %{_mandir}/man1/gtk4-launch.1*
@@ -226,6 +224,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
+* Mon Sep 20 2021 Kalev Lember <klember@redhat.com> - 4.4.0-3
+- Stop creating empty theming-engines directory as it's no longer used
+
 * Thu Sep 02 2021 Michael Catanzaro <mcatanzaro@redhat.com> - 4.4.0-2
 - Split developer tools out to devel-tools subpackage
 
