@@ -17,7 +17,7 @@
 
 Name:           gtk4
 Version:        4.4.0
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
@@ -50,6 +50,7 @@ BuildRequires:  pkgconfig(pango) >= %{pango_version}
 BuildRequires:  pkgconfig(rest-0.7)
 BuildRequires:  pkgconfig(sysprof-4)
 BuildRequires:  pkgconfig(sysprof-capture-4)
+BuildRequires:  pkgconfig(tracker-sparql-3.0)
 BuildRequires:  pkgconfig(wayland-client) >= %{wayland_version}
 BuildRequires:  pkgconfig(wayland-cursor) >= %{wayland_version}
 BuildRequires:  pkgconfig(wayland-egl) >= %{wayland_version}
@@ -127,6 +128,7 @@ export CFLAGS='-fno-strict-aliasing -DG_DISABLE_CAST_CHECKS -DG_DISABLE_ASSERT %
         -Dbroadway-backend=true \
 %endif
         -Dsysprof=enabled \
+        -Dtracker=enabled \
         -Dcolord=enabled \
         -Dgtk_doc=true \
         -Dman-pages=true \
@@ -224,6 +226,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
+* Mon Sep 27 2021 Kalev Lember <klember@redhat.com> - 4.4.0-4
+- Build with tracker support enabled (#1908874)
+
 * Mon Sep 20 2021 Kalev Lember <klember@redhat.com> - 4.4.0-3
 - Stop creating empty theming-engines directory as it's no longer used
 
