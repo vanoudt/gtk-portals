@@ -17,7 +17,7 @@
 
 Name:           gtk4
 Version:        4.5.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
@@ -106,7 +106,8 @@ for writing applications with version 4 of the GTK widget toolkit.
 
 %package devel-docs
 Summary: Developer documentation for GTK
-Requires: gtk4%{?_isa} = %{version}-%{release}
+BuildArch: noarch
+Requires: gtk4 = %{version}-%{release}
 
 %description devel-docs
 This package contains developer documentation for version 4 of the GTK
@@ -227,6 +228,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
+* Mon Nov 01 2021 Kalev Lember <klember@redhat.com> - 4.5.0-2
+- Build -devel-docs as noarch (#2018991)
+
 * Mon Nov 01 2021 Kalev Lember <klember@redhat.com> - 4.5.0-1
 - Update to 4.5.0
 
