@@ -3,7 +3,7 @@
 %endif
 
 %global glib2_version 2.66.0
-%global pango_version 1.47.0
+%global pango_version 1.49.1
 %global cairo_version 1.14.0
 %global gdk_pixbuf_version 2.30.0
 %global wayland_protocols_version 1.21
@@ -16,15 +16,13 @@
 %global __provides_exclude_from ^%{_libdir}/gtk-4.0
 
 Name:           gtk4
-Version:        4.4.0
-Release:        4%{?dist}
+Version:        4.5.0
+Release:        1%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
 URL:            https://www.gtk.org
-Source0:        https://download.gnome.org/sources/gtk/4.4/gtk-%{version}.tar.xz
-# Backported from upstream
-Patch0:         0001-build-Fix-detection-for-pre-compiled-css-files.patch
+Source0:        https://download.gnome.org/sources/gtk/4.5/gtk-%{version}.tar.xz
 
 BuildRequires:  cups-devel
 BuildRequires:  desktop-file-utils
@@ -46,6 +44,9 @@ BuildRequires:  pkgconfig(gobject-introspection-1.0)
 BuildRequires:  pkgconfig(graphene-gobject-1.0)
 BuildRequires:  pkgconfig(gstreamer-player-1.0)
 BuildRequires:  pkgconfig(json-glib-1.0)
+BuildRequires:  pkgconfig(libjpeg)
+BuildRequires:  pkgconfig(libpng)
+BuildRequires:  pkgconfig(libtiff-4)
 BuildRequires:  pkgconfig(pango) >= %{pango_version}
 BuildRequires:  pkgconfig(rest-0.7)
 BuildRequires:  pkgconfig(sysprof-4)
@@ -64,7 +65,7 @@ BuildRequires:  pkgconfig(xinerama)
 BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  pkgconfig(xrandr)
 BuildRequires:  pkgconfig(xrender)
-BuildRequires:  /usr/bin/xsltproc
+BuildRequires:  /usr/bin/rst2man
 
 # standard icons
 Requires: adwaita-icon-theme
@@ -226,6 +227,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
+* Mon Nov 01 2021 Kalev Lember <klember@redhat.com> - 4.5.0-1
+- Update to 4.5.0
+
 * Mon Sep 27 2021 Kalev Lember <klember@redhat.com> - 4.4.0-4
 - Build with tracker support enabled (#1908874)
 
