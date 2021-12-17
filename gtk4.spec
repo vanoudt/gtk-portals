@@ -3,7 +3,7 @@
 %endif
 
 %global glib2_version 2.66.0
-%global pango_version 1.49.1
+%global pango_version 1.50.0
 %global cairo_version 1.14.0
 %global gdk_pixbuf_version 2.30.0
 %global wayland_protocols_version 1.21
@@ -16,8 +16,8 @@
 %global __provides_exclude_from ^%{_libdir}/gtk-4.0
 
 Name:           gtk4
-Version:        4.5.0
-Release:        2%{?dist}
+Version:        4.5.1
+Release:        1%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
@@ -197,8 +197,6 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %files devel-docs
 %{_datadir}/doc/gdk4/
 %{_datadir}/doc/gdk4-wayland/
-%{_datadir}/doc/gdk4-wayland/
-%{_datadir}/doc/gdk4-x11/
 %{_datadir}/doc/gdk4-x11/
 %{_datadir}/doc/gsk4/
 %{_datadir}/doc/gtk4/
@@ -228,6 +226,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
+* Fri Dec 17 2021 David King <amigadave@amigadave.com> - 4.5.1-1
+- Update to 4.5.1
+
 * Mon Nov 01 2021 Kalev Lember <klember@redhat.com> - 4.5.0-2
 - Build -devel-docs as noarch (#2018991)
 
