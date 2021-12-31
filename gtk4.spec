@@ -16,13 +16,13 @@
 %global __provides_exclude_from ^%{_libdir}/gtk-4.0
 
 Name:           gtk4
-Version:        4.5.1
+Version:        4.6.0
 Release:        1%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
 URL:            https://www.gtk.org
-Source0:        https://download.gnome.org/sources/gtk/4.5/gtk-%{version}.tar.xz
+Source0:        https://download.gnome.org/sources/gtk/4.6/gtk-%{version}.tar.xz
 
 BuildRequires:  cups-devel
 BuildRequires:  desktop-file-utils
@@ -32,6 +32,7 @@ BuildRequires:  gcc-c++
 BuildRequires:  gettext
 BuildRequires:  gi-docgen
 BuildRequires:  meson
+BuildRequires:  python3-gobject
 BuildRequires:  pkgconfig(avahi-gobject)
 BuildRequires:  pkgconfig(cairo) >= %{cairo_version}
 BuildRequires:  pkgconfig(cairo-gobject) >= %{cairo_version}
@@ -226,6 +227,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
+* Fri Dec 31 2021 David King <amigadave@amigadave.com> - 4.6.0-1
+- Update to 4.6.0
+
 * Fri Dec 17 2021 David King <amigadave@amigadave.com> - 4.5.1-1
 - Update to 4.5.1
 
