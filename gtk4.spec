@@ -6,8 +6,8 @@
 %global pango_version 1.50.0
 %global cairo_version 1.14.0
 %global gdk_pixbuf_version 2.30.0
-%global wayland_protocols_version 1.21
-%global wayland_version 1.16.91
+%global wayland_protocols_version 1.23
+%global wayland_version 1.20.0
 %global epoxy_version 1.4
 
 %global bin_version 4.0.0
@@ -16,8 +16,8 @@
 %global __provides_exclude_from ^%{_libdir}/gtk-4.0
 
 Name:           gtk4
-Version:        4.6.0
-Release:        2%{?dist}
+Version:        4.6.1
+Release:        1%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
@@ -227,6 +227,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
+* Mon Feb 14 2022 David King <amigadave@amigadave.com> - 4.6.1-1
+- Update to 4.6.1
+
 * Thu Jan 20 2022 Fedora Release Engineering <releng@fedoraproject.org> - 4.6.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
 
