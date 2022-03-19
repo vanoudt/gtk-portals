@@ -16,18 +16,13 @@
 %global __provides_exclude_from ^%{_libdir}/gtk-4.0
 
 Name:           gtk4
-Version:        4.6.1
-Release:        2%{?dist}
+Version:        4.6.2
+Release:        1%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
 URL:            https://www.gtk.org
 Source0:        https://download.gnome.org/sources/gtk/4.6/gtk-%{version}.tar.xz
-
-# Fix control-center pane launching from overview:
-# https://gitlab.gnome.org/GNOME/gnome-control-center/-/issues/1675
-# https://gitlab.gnome.org/GNOME/gtk/-/merge_requests/4366
-Patch0:         0001-wayland-xdg-activation-Don-t-assume-there-s-a-focus-.patch
 
 BuildRequires:  cups-devel
 BuildRequires:  desktop-file-utils
@@ -232,6 +227,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
+* Sat Mar 19 2022 David King <amigadave@amigadave.com> - 4.6.2-1
+- Update to 4.6.2
+
 * Wed Mar 02 2022 Adam Williamson <awilliam@redhat.com> - 4.6.1-2
 - Backport MR#4366 to fix launching control-center panes from overview
 
