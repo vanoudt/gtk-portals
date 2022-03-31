@@ -17,12 +17,17 @@
 
 Name:           gtk4
 Version:        4.6.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
 URL:            https://www.gtk.org
 Source0:        https://download.gnome.org/sources/gtk/4.6/gtk-%{version}.tar.xz
+# Fix portal save/load dialogs not working on X
+# https://bugzilla.redhat.com/show_bug.cgi?id=2068041
+# https://gitlab.gnome.org/GNOME/gtk/-/issues/4805
+# https://gitlab.gnome.org/GNOME/gtk/-/merge_requests/4605
+Patch0:         0001-gtkimmulticontext-Handle-switches-between-displays.patch
 
 BuildRequires:  cups-devel
 BuildRequires:  desktop-file-utils
@@ -227,6 +232,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
+* Thu Mar 31 2022 Adam Williamson <awilliam@redhat.com> - 4.6.2-2
+- Backport MR #4605 to fix portal save/load dialogs on X (#2068041)
+
 * Sat Mar 19 2022 David King <amigadave@amigadave.com> - 4.6.2-1
 - Update to 4.6.2
 
