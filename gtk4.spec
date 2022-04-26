@@ -17,7 +17,7 @@
 
 Name:           gtk4
 Version:        4.6.2
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
@@ -28,6 +28,12 @@ Source0:        https://download.gnome.org/sources/gtk/4.6/gtk-%{version}.tar.xz
 # https://gitlab.gnome.org/GNOME/gtk/-/issues/4805
 # https://gitlab.gnome.org/GNOME/gtk/-/merge_requests/4605
 Patch0:         0001-gtkimmulticontext-Handle-switches-between-displays.patch
+# Fix "gtk_widget_measure: assertion 'for_size >= -1' failed" loop bug
+# Patch proposed by Benjamin Otte, no MR yet
+# https://bugzilla.redhat.com/show_bug.cgi?id=2071228
+# https://gitlab.gnome.org/GNOME/gtk/-/issues/4517
+# https://gitlab.gnome.org/GNOME/gtk/-/commit/90e372fb8e55fa2176d019dd5875a667ed8d3fbc
+Patch1:         90e372fb8e55fa2176d019dd5875a667ed8d3fbc.patch
 
 BuildRequires:  cups-devel
 BuildRequires:  desktop-file-utils
@@ -232,6 +238,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
+* Tue Apr 26 2022 Adam Williamson <awilliam@redhat.com> - 4.6.2-2.1awb
+- Fix from Benjamin for gtk_widget_measure infinite loop issue (#2071228)
+
 * Thu Mar 31 2022 Adam Williamson <awilliam@redhat.com> - 4.6.2-2
 - Backport MR #4605 to fix portal save/load dialogs on X (#2068041)
 
