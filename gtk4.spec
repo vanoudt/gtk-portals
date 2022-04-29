@@ -236,7 +236,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 * Thu Apr 28 2022 David King <amigadave@amigadave.com> - 4.6.3-1
 - Update to 4.6.3
 
-* Tue Apr 26 2022 Adam Williamson <awilliam@redhat.com> - 4.6.2-2.1awb
+* Tue Apr 26 2022 Adam Williamson <awilliam@redhat.com> - 4.6.2-3
 - Fix from Benjamin for gtk_widget_measure infinite loop issue (#2071228)
 
 * Thu Mar 31 2022 Adam Williamson <awilliam@redhat.com> - 4.6.2-2
