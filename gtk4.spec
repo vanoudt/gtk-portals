@@ -16,19 +16,13 @@
 %global __provides_exclude_from ^%{_libdir}/gtk-4.0
 
 Name:           gtk4
-Version:        4.6.3
+Version:        4.7.0
 Release:        1%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
 URL:            https://www.gtk.org
-Source0:        https://download.gnome.org/sources/gtk/4.6/gtk-%{version}.tar.xz
-# Fix "gtk_widget_measure: assertion 'for_size >= -1' failed" loop bug
-# Patch proposed by Benjamin Otte, no MR yet
-# https://bugzilla.redhat.com/show_bug.cgi?id=2071228
-# https://gitlab.gnome.org/GNOME/gtk/-/issues/4517
-# https://gitlab.gnome.org/GNOME/gtk/-/commit/90e372fb8e55fa2176d019dd5875a667ed8d3fbc
-Patch1:         90e372fb8e55fa2176d019dd5875a667ed8d3fbc.patch
+Source0:        https://download.gnome.org/sources/gtk/4.7/gtk-%{version}.tar.xz
 
 BuildRequires:  cups-devel
 BuildRequires:  desktop-file-utils
@@ -212,27 +206,35 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_bindir}/gtk4-demo
 %{_bindir}/gtk4-demo-application
 %{_bindir}/gtk4-icon-browser
+%{_bindir}/gtk4-node-editor
 %{_bindir}/gtk4-print-editor
 %{_bindir}/gtk4-widget-factory
+%{_datadir}/applications/org.gtk.gtk4.NodeEditor.desktop
 %{_datadir}/applications/org.gtk.Demo4.desktop
 %{_datadir}/applications/org.gtk.IconBrowser4.desktop
 %{_datadir}/applications/org.gtk.PrintEditor4.desktop
 %{_datadir}/applications/org.gtk.WidgetFactory4.desktop
+%{_datadir}/icons/hicolor/*/apps/org.gtk.gtk4.NodeEditor*.svg
 %{_datadir}/icons/hicolor/*/apps/org.gtk.Demo4*.svg
 %{_datadir}/icons/hicolor/*/apps/org.gtk.IconBrowser4*.svg
 %{_datadir}/icons/hicolor/*/apps/org.gtk.PrintEditor4*.svg
 %{_datadir}/icons/hicolor/*/apps/org.gtk.WidgetFactory4*.svg
 %{_datadir}/glib-2.0/schemas/org.gtk.Demo4.gschema.xml
-%{_datadir}/metainfo/org.gtk.Demo4.appdata.xml
-%{_datadir}/metainfo/org.gtk.IconBrowser4.appdata.xml
-%{_datadir}/metainfo/org.gtk.PrintEditor4.appdata.xml
-%{_datadir}/metainfo/org.gtk.WidgetFactory4.appdata.xml
+%{_metainfodir}/org.gtk.gtk4.NodeEditor.appdata.xml
+%{_metainfodir}/org.gtk.Demo4.appdata.xml
+%{_metainfodir}/org.gtk.IconBrowser4.appdata.xml
+%{_metainfodir}/org.gtk.PrintEditor4.appdata.xml
+%{_metainfodir}/org.gtk.WidgetFactory4.appdata.xml
 %{_mandir}/man1/gtk4-demo.1*
 %{_mandir}/man1/gtk4-demo-application.1*
 %{_mandir}/man1/gtk4-icon-browser.1*
+%{_mandir}/man1/gtk4-node-editor.1*
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
+* Mon May 09 2022 David King <amigadave@amigadave.com> - 4.7.0-1
+- Update to 4.7.0
+
 * Thu Apr 28 2022 David King <amigadave@amigadave.com> - 4.6.3-1
 - Update to 4.6.3
 
