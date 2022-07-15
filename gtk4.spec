@@ -6,7 +6,7 @@
 %global pango_version 1.50.0
 %global cairo_version 1.14.0
 %global gdk_pixbuf_version 2.30.0
-%global wayland_protocols_version 1.23
+%global wayland_protocols_version 1.25
 %global wayland_version 1.20.0
 %global epoxy_version 1.4
 
@@ -16,7 +16,7 @@
 %global __provides_exclude_from ^%{_libdir}/gtk-4.0
 
 Name:           gtk4
-Version:        4.7.0
+Version:        4.7.1
 Release:        1%{?dist}
 Summary:        GTK graphical user interface library
 
@@ -143,7 +143,6 @@ export CFLAGS='-fno-strict-aliasing -DG_DISABLE_CAST_CHECKS -DG_DISABLE_ASSERT %
 %meson_install
 
 %find_lang gtk40
-%find_lang gtk40-properties
 
 %if !0%{?with_broadway}
 rm $RPM_BUILD_ROOT%{_mandir}/man1/gtk4-broadwayd.1*
@@ -180,7 +179,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-broadwayd.1*
 %endif
 
-%files devel -f gtk40-properties.lang
+%files devel
 %{_libdir}/libgtk-4.so
 %{_includedir}/*
 %{_libdir}/pkgconfig/*
@@ -232,6 +231,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
+* Fri Jul 15 2022 Kalev Lember <klember@redhat.com> - 4.7.1-1
+- Update to 4.7.1
+
 * Mon May 09 2022 David King <amigadave@amigadave.com> - 4.7.0-1
 - Update to 4.7.0
 
