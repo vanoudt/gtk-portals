@@ -17,12 +17,16 @@
 
 Name:           gtk4
 Version:        4.7.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
 URL:            https://www.gtk.org
 Source0:        https://download.gnome.org/sources/gtk/4.7/gtk-%{version}.tar.xz
+# Temporarily revert this until we figure out how to best restore
+# private requires that are needed for rpm automatic dep extraction.
+# https://gitlab.gnome.org/GNOME/gtk/-/merge_requests/4756
+Patch0:         0001-Revert-Meson-Simplify-pkgconfig-file-generator.patch
 
 BuildRequires:  cups-devel
 BuildRequires:  desktop-file-utils
@@ -231,6 +235,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
+* Mon Jul 25 2022 Kalev Lember <klember@redhat.com> - 4.7.1-3
+- Work around broken rpm pkg-config dep extraction
+
 * Thu Jul 21 2022 Fedora Release Engineering <releng@fedoraproject.org> - 4.7.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild
 
