@@ -17,12 +17,13 @@
 
 Name:           gtk4
 Version:        4.7.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
 URL:            https://www.gtk.org
 Source0:        https://download.gnome.org/sources/gtk/4.7/gtk-%{version}.tar.xz
+Source1:        settings.ini
 # Temporarily revert this until we figure out how to best restore
 # private requires that are needed for rpm automatic dep extraction.
 # https://gitlab.gnome.org/GNOME/gtk/-/merge_requests/4756
@@ -155,6 +156,8 @@ rm $RPM_BUILD_ROOT%{_mandir}/man1/gtk4-broadwayd.1*
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/gtk-4.0
 mkdir -p $RPM_BUILD_ROOT%{_libdir}/gtk-4.0/modules
 
+install -p %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/gtk-4.0/
+
 %check
 desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 
@@ -178,6 +181,7 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_datadir}/glib-2.0/schemas/org.gtk.gtk4.Settings.FileChooser.gschema.xml
 %dir %{_datadir}/gtk-4.0
 %{_datadir}/gtk-4.0/emoji/
+%{_datadir}/gtk-4.0/settings.ini
 %if 0%{?with_broadway}
 %{_bindir}/gtk4-broadwayd
 %{_mandir}/man1/gtk4-broadwayd.1*
@@ -235,6 +239,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
+* Tue Aug 16 2022 Michael Catanzaro <mcatanzaro@redhat.com> - 4.7.2-2
+- Enable font hinting (#1943794)
+
 * Thu Aug 11 2022 Kalev Lember <klember@redhat.com> - 4.7.2-1
 - Update to 4.7.2
 
