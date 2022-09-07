@@ -7,7 +7,7 @@
 %global cairo_version 1.14.0
 %global gdk_pixbuf_version 2.30.0
 %global wayland_protocols_version 1.25
-%global wayland_version 1.20.0
+%global wayland_version 1.21.0
 %global epoxy_version 1.4
 
 %global bin_version 4.0.0
