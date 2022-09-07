@@ -16,13 +16,13 @@
 %global __provides_exclude_from ^%{_libdir}/gtk-4.0
 
 Name:           gtk4
-Version:        4.7.2
-Release:        2%{?dist}
+Version:        4.8.0
+Release:        1%{?dist}
 Summary:        GTK graphical user interface library
 
 License:        LGPLv2+
 URL:            https://www.gtk.org
-Source0:        https://download.gnome.org/sources/gtk/4.7/gtk-%{version}.tar.xz
+Source0:        https://download.gnome.org/sources/gtk/4.8/gtk-%{version}.tar.xz
 Source1:        settings.ini
 # Temporarily revert this until we figure out how to best restore
 # private requires that are needed for rpm automatic dep extraction.
@@ -239,6 +239,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
+* Wed Sep 07 2022 Kalev Lember <klember@redhat.com> - 4.8.0-1
+- Update to 4.8.0
+
 * Tue Aug 16 2022 Michael Catanzaro <mcatanzaro@redhat.com> - 4.7.2-2
 - Enable font hinting (#1943794)
 
