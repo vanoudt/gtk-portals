@@ -16,7 +16,7 @@
 %global __provides_exclude_from ^%{_libdir}/gtk-4.0
 
 Name:           gtk4
-Version:        4.8.0
+Version:        4.8.1
 Release:        1%{?dist}
 Summary:        GTK graphical user interface library
 
@@ -239,6 +239,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_mandir}/man1/gtk4-widget-factory.1*
 
 %changelog
+* Fri Sep 16 2022 Kalev Lember <klember@redhat.com> - 4.8.1-1
+- Update to 4.8.1
+
 * Wed Sep 07 2022 Kalev Lember <klember@redhat.com> - 4.8.0-1
 - Update to 4.8.0
 
