@@ -1,0 +1,34 @@
+From 22efa03cae870dfc049b4a2d313173f8ef312a81 Mon Sep 17 00:00:00 2001
+From: Adam Williamson <awilliam@redhat.com>
+Date: Tue, 1 Nov 2022 17:26:29 -0700
+Subject: [PATCH] focus: fall back to old behaviour if we didn't focus anything
+
+8455b9ac74 seems to have introduced a problem where we can wind
+up focusing no widget at all if the `while (parent)` loop doesn't
+find a widget it can successfully move the focus to. This 'fixes'
+that by falling back to doing the previous thing if we make it
+all the way through that loop without moving the focus. Thanks to
+@coreyberla for a hint to improve the implementation.
+
+Signed-off-by: Adam Williamson <awilliam@redhat.com>
+---
+ gtk/gtkwindow.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/gtk/gtkwindow.c b/gtk/gtkwindow.c
+index a7cbde18bc..21dfb49880 100644
+--- a/gtk/gtkwindow.c
++++ b/gtk/gtkwindow.c
+@@ -4703,6 +4703,9 @@ maybe_unset_focus_and_default (GtkWindow *window)
+           parent = _gtk_widget_get_parent (parent);
+         }
+ 
++      if (!parent)
++        gtk_widget_child_focus (GTK_WIDGET (window), GTK_DIR_TAB_FORWARD);
++
+       priv->move_focus = FALSE;
+       g_clear_object (&priv->move_focus_widget);
+     }
+-- 
+2.37.3
+

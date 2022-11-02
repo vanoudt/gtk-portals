@@ -1,0 +1,26 @@
+From 339b9eb1b979fffc751cc82d1142d6231be8f0c5 Mon Sep 17 00:00:00 2001
+From: Mat <mail@mathias.is>
+Date: Wed, 26 Oct 2022 13:51:23 +0300
+Subject: [PATCH] Revert "treepopover: Do not propagate natural width of
+ content"
+
+This reverts commit 9c919ffa462dd4511da0bfd19d36d2e15c51651b.
+---
+ gtk/gtktreepopover.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/gtk/gtktreepopover.c b/gtk/gtktreepopover.c
+index 992c4574a5..ca7575a765 100644
+--- a/gtk/gtktreepopover.c
++++ b/gtk/gtktreepopover.c
+@@ -266,6 +266,7 @@ gtk_tree_popover_init (GtkTreePopover *popover)
+ 
+   sw = gtk_scrolled_window_new ();
+   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
++  gtk_scrolled_window_set_propagate_natural_width (GTK_SCROLLED_WINDOW (sw), TRUE);
+   gtk_scrolled_window_set_propagate_natural_height (GTK_SCROLLED_WINDOW (sw), TRUE);
+   gtk_popover_set_child (GTK_POPOVER (popover), sw);
+ 
+-- 
+2.37.3
+
