@@ -1,0 +1,41 @@
+From 0ad916031939ab8a1c2ad13b746f70a7f8fd76bf Mon Sep 17 00:00:00 2001
+From: Nicholas van Oudtshoorn <vanoudt@gmail.com>
+Date: Tue, 15 Nov 2022 13:15:07 +0800
+Subject: [PATCH 1/1] Restore GTK_USE_PORTALS support
+
+---
+ gdk/gdk.c | 17 ++++++++++++++---
+ 1 file changed, 14 insertions(+), 3 deletions(-)
+
+diff --git a/gdk/gdk.c b/gdk/gdk.c
+index e6a1ebb51e..fddbcffd92 100644
+--- a/gdk/gdk.c
++++ b/gdk/gdk.c
+@@ -359,10 +359,21 @@ gdk_should_use_portal (void)
+   if (gdk_display_get_debug_flags (NULL) & GDK_DEBUG_PORTALS)
+     return TRUE;
+ 
+-  if (gdk_running_in_sandbox ())
+-    return TRUE;
++  static const char *use_portal = NULL;
++
++  if (G_UNLIKELY (use_portal == NULL))
++    {
++      if (gdk_running_in_sandbox ())
++        use_portal = "1";
++      else
++        {
++          use_portal = g_getenv ("GTK_USE_PORTAL");
++          if (!use_portal)
++            use_portal = "";
++        }
++    }
+ 
+-  return FALSE;
++  return use_portal[0] == '1';
+ }
+ 
+ PangoDirection
+-- 
+2.38.1
+

@@ -37,7 +37,7 @@ Patch1:         0001-focus-fall-back-to-old-behaviour-if-we-didn-t-focus-.patch
 # https://gitlab.gnome.org/GNOME/gtk/-/issues/5192
 # Avoids app widgets potentially becoming unexpectedly narrower
 Patch2:         0001-Revert-treepopover-Do-not-propagate-natural-width-of.patch
-
+Patch3:         0001-Revert-removing-gtk-portals.patch
 
 BuildRequires:  cups-devel
 BuildRequires:  desktop-file-utils
